@@ -1,0 +1,110 @@
+[
+ {
+  "uid": "sp27",
+  "abbr": "S&P",
+  "checked": "2026-10-25",
+  "vstatus": "已核实",
+  "evidence": "https://sp2027.ieee-security.org/cfpapers.html",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "6 篇/轮",
+  "nb_status": "有专属条款",
+  "nb_review": "无审稿义务",
+  "nb_quota": "每位作者每轮最多 6 篇（适用于所有作者）",
+  "nb_senior": "不强制",
+  "nb_account": "摘要注册时须填全部作者 ORCID，邮箱须与 HotCRP 一致",
+  "nb_track": "无",
+  "nb_fee": "设学生差旅资助（组委会设专职主席）",
+  "nb_conf": "高",
+  "nb_note": "CFP 原文：Any author may submit no more than 6 papers per cycle",
+  "rc_note": "2027 CFP 已上线，第二轮 2026-11-17 截稿；每人每轮≤6 篇"
+ },
+ {
+  "uid": "pldi27",
+  "abbr": "PLDI",
+  "checked": "2026-10-25",
+  "evidence": "https://pldi27.sigplan.org/track/pldi-2027-papers",
+  "onsite": "必须到场",
+  "remote": "不允许远程报告",
+  "nb_status": "有专属条款",
+  "nb_review": "每篇须 1 名资深作者注册 reserve reviewer（无资深作者可豁免）",
+  "nb_quota": "无",
+  "nb_senior": "不强制",
+  "nb_account": "无门槛",
+  "nb_track": "无",
+  "nb_fee": "录用后可申请 SIGPLAN PAC 差旅资助",
+  "nb_conf": "高",
+  "nb_note": "资深=博士毕业满 5 年或任教职；作者全为新人可豁免",
+  "rc_note": "CFP 原文：Remote presentations will not be possible"
+ },
+ {
+  "uid": "rtas2027",
+  "abbr": "RTAS",
+  "checked": "2026-10-25",
+  "evidence": "https://2027.rtas.org/submission",
+  "onsite": "必须到场",
+  "remote": "不允许预录视频报告",
+  "rc_note": "未现场报告的论文将从 IEEE Xplore 撤除"
+ },
+ {
+  "uid": "mlsys27",
+  "abbr": "MLSys",
+  "checked": "2026-10-25",
+  "evidence": "https://mlsys.org/Conferences/2027/CallForResearchPapers",
+  "author_limit": "按合著人数配额：单作者论文最多 2 篇，10+ 作者论文最多 20 篇",
+  "rc_note": "CFP 未写到场要求"
+ },
+ {
+  "uid": "mmsys27",
+  "abbr": "MMSys",
+  "checked": "2026-10-25",
+  "vstatus": "已核实",
+  "evidence": "https://2027.acmmmsys.org/research-track.html",
+  "rc_note": "研究轨两轮截稿 2026-09-17 / 11-19；页面未写到场与新人条款"
+ },
+ {
+  "uid": "cvm27",
+  "abbr": "CVM",
+  "checked": "2026-10-25",
+  "evidence": "http://iccvm.org/2027/callPaper.htm",
+  "rc_note": "CFP 仅写 14 页上限与 10-26 23:59 GMT 截稿，未写到场与新人条款"
+ },
+ {
+  "uid": "hscc27",
+  "abbr": "HSCC",
+  "checked": "2026-10-25",
+  "evidence": "https://hscc-iccps2027.taylortjohnson.com/authors/",
+  "rc_note": "Authors 页未写到场与新人条款；artifact evaluation 自愿参加"
+ },
+ {
+  "uid": "ecoop27",
+  "abbr": "ECOOP",
+  "checked": "2026-10-25",
+  "evidence": "https://2027.ecoop.org/track/ecoop-2027-technical-papers",
+  "rc_note": "Technical Papers 页未写到场要求"
+ },
+ {
+  "uid": "cscwd27",
+  "abbr": "CSCWD",
+  "checked": "2026-10-25",
+  "rc_note": "重查失败：官网超时"
+ },
+ {
+  "uid": "noms27",
+  "abbr": "NOMS",
+  "checked": "2026-10-25",
+  "rc_note": "重查失败：官网拒绝抓取（HTTP 418），需人工打开"
+ },
+ {
+  "uid": "caise27",
+  "abbr": "CAiSE",
+  "checked": "2026-10-25",
+  "rc_note": "重查失败：CFP 子页 404、首页超时"
+ },
+ {
+  "uid": "pacificvis27",
+  "abbr": "PacificVis",
+  "checked": "2026-10-25",
+  "rc_note": "首页称各 CFP 已发布但未给链接，需人工进入"
+ }
+]

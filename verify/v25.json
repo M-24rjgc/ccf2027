@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "PETS",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "设虚拟会场，报告录像供线上",
+  "author_limit": "不限",
+  "newbie": "设最佳学生论文奖",
+  "aa_deadline": "2026-11-30",
+  "decision": "2027-02-01",
+  "evidence": "https://petsymposium.org/cfp27.php",
+  "vconf": "高",
+  "vnote": "PoPETs每年4期滚动征稿，此为最近一期Issue 3"
+ },
+ {
+  "abbr": "SACMAT",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.sacmat.org/2027/",
+  "vconf": "低",
+  "vnote": "官网仅有会期2027-07-19至21及地点，无征稿细则"
+ },
+ {
+  "abbr": "SEC",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://ifipsec.org/",
+  "vconf": "低",
+  "vnote": "官网写明Full details available soon，无截稿日"
+ },
+ {
+  "abbr": "SOUPS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.usenix.org/conference/soups2027",
+  "vconf": "低",
+  "vnote": "USENIX页面已建但仅标题，CFP未挂出"
+ },
+ {
+  "abbr": "SecureComm",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "Hybrid混合会议，可线上参会",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-01",
+  "decision": "2027-03-15",
+  "evidence": "https://securecomm.eai-conferences.org/2027/",
+  "vconf": "高",
+  "vnote": "两轮征稿，Cycle1截稿2027-02-01，Cycle2为2027-04-15"
+ },
+ {
+  "abbr": "COMPSAC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设学生论文竞赛与研究生论坛",
+  "aa_deadline": "2027-01-31",
+  "decision": "2027-04-07",
+  "evidence": "https://ieeecompsac.computer.org/2027/",
+  "vconf": "高",
+  "vnote": "官网未明示是否强制现场报告"
+ }
+]

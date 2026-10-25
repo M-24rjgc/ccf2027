@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "ICSME",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-03-05",
+  "decision": "2027-05-28",
+  "evidence": "https://conf.researchr.org/home/icsme-2027",
+  "vconf": "高",
+  "vnote": "官网仅列正文截稿，未列摘要截稿"
+ },
+ {
+  "abbr": "ISSRE",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://conf.researchr.org/home/issre-2027",
+  "vconf": "低",
+  "vnote": "官网仅公告会期2027-10-19至22，截至日期页为空"
+ },
+ {
+  "abbr": "RE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-03-01",
+  "decision": "2027-05-14",
+  "evidence": "https://conf.researchr.org/dates/RE-2027",
+  "vconf": "高",
+  "vnote": "摘要截止2027-02-22；另有RE@Next!新投稿者track"
+ },
+ {
+  "abbr": "SANER",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-25",
+  "decision": "2026-12-01",
+  "evidence": "https://conf.researchr.org/dates/saner-2027",
+  "vconf": "高",
+  "vnote": "Research Track摘要2026-09-21强制提交"
+ },
+ {
+  "abbr": "VMCAI",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "纯线下，无virtual选项",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-30",
+  "decision": "2026-11-06",
+  "evidence": "https://conf.researchr.org/home/VMCAI-2027",
+  "vconf": "高",
+  "vnote": "明确要求至少一位作者注册并现场报告"
+ },
+ {
+  "abbr": "AISTATS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-06",
+  "decision": "2027-01-20",
+  "evidence": "https://virtual.aistats.org/Conferences/2027",
+  "vconf": "高",
+  "vnote": "摘要2026-09-29；主会投稿已关闭"
+ },
+ {
+  "abbr": "ALT",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://algorithmiclearningtheory.org/alt2027/",
+  "vconf": "低",
+  "vnote": "官网仅有会议标题，无征稿信息"
+ }
+]

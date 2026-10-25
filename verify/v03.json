@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "SIGMOD",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "10 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-17",
+  "decision": "2027-01-19",
+  "evidence": "https://2027.sigmod.org/calls_papers_important_dates.shtml",
+  "vconf": "高",
+  "vnote": "四轮截稿，取末轮R4；终审通知2027-03-12"
+ },
+ {
+  "abbr": "VLDB",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "每月2篇/全年12篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-03-01",
+  "decision": "",
+  "evidence": "https://vldb.org/pvldb/volumes/20/submission",
+  "vconf": "高",
+  "vnote": "每月1日滚动截稿，此处取最终截稿日"
+ },
+ {
+  "abbr": "ASPLOS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "4 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-09",
+  "decision": "2026-12-21",
+  "evidence": "https://www.asplos-conference.org/asplos2027/cfp/",
+  "vconf": "高",
+  "vnote": "两轮截稿(4/15、9/9)，此处取九月周期"
+ },
+ {
+  "abbr": "DAC",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-18",
+  "decision": "2027-03-08",
+  "evidence": "https://dac.com/2027/program/research-manuscript-submissions",
+  "vconf": "高",
+  "vnote": "摘要2026-11-11；须注册并现场海报报告"
+ },
+ {
+  "abbr": "EuroSys",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "3 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-24",
+  "decision": "2027-01-29",
+  "evidence": "https://2027.eurosys.org/cfp.html",
+  "vconf": "高",
+  "vnote": "春秋两轮，取秋季轮；每篇需一份全费注册"
+ },
+ {
+  "abbr": "FAST",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "无线上报告选项",
+  "author_limit": "不限",
+  "newbie": "设Mentoring Co-Chairs",
+  "aa_deadline": "2026-09-15",
+  "decision": "2026-12-08",
+  "evidence": "https://www.usenix.org/conference/fast27/call-for-papers",
+  "vconf": "高",
+  "vnote": "春秋两轮，取秋季轮；无独立摘要截稿"
+ },
+ {
+  "abbr": "HPCA",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-07-31",
+  "decision": "2026-11-06",
+  "evidence": "https://sigarch.org/call-contributions/hpca-2027",
+  "vconf": "高",
+  "vnote": "官网track页404，读SIGARCH官方CFP"
+ }
+]

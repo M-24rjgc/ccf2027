@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "EvoMUSART",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "学生论文可申报优秀学生论文",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.evostar.org/2027/submit-paper/",
+  "vconf": "中",
+  "vnote": "2027官网已上线但未列截稿/通知日期，仅确认须到场报告"
+ },
+ {
+  "abbr": "RSS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-04",
+  "decision": "2027-04-30",
+  "evidence": "https://roboticsconference.org/",
+  "vconf": "高",
+  "vnote": "12-04为扩展摘要截稿；正式论文4-16，录用通知4-30"
+ },
+ {
+  "abbr": "WACV",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设博士生论坛等学生支持",
+  "aa_deadline": "2026-08-28",
+  "decision": "2026-10-14",
+  "evidence": "https://wacv.thecvf.com/Conferences/2027/Dates",
+  "vconf": "高",
+  "vnote": "两轮投稿：R1 2026-06-26、R2 2026-08-28；两轮终审同为10-14"
+ },
+ {
+  "abbr": "ACM SIGGRAPH ASIA",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://asia.siggraph.org/2027/",
+  "vconf": "低",
+  "vnote": "2027页面404，当前官网仅至2026届（吉隆坡12/1-4）"
+ },
+ {
+  "abbr": "EUSIPCO",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-06",
+  "decision": "",
+  "evidence": "https://eusipco2027.de/",
+  "vconf": "高",
+  "vnote": "会期2027-08-30至09-03，达姆施塔特；未列录用通知日"
+ },
+ {
+  "abbr": "IEEE CoG",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "",
+  "vconf": "低",
+  "vnote": "官网仅返回标题无正文，call-for-papers子页404"
+ }
+]

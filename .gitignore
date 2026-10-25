@@ -1,0 +1,11 @@
+.env
+*.env
+__pycache__/
+preview*.png
+.cache/
+.env.*
+AGENT_BRIEF.md
+BRIEF*.md
+AGENTS.md
+slices/
+*_slices/

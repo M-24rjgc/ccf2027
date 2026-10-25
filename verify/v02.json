@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "CAV",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "5 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-20",
+  "decision": "2027-04-23",
+  "evidence": "https://conferences.i-cav.org/2027/cfp/",
+  "vconf": "高",
+  "vnote": "全文2027-01-20；每作者限投5篇（含三类）"
+ },
+ {
+  "abbr": "LICS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://lics.siglog.org/lics27/",
+  "vconf": "中",
+  "vnote": "官网仅占位页，注明信息稍后公布"
+ },
+ {
+  "abbr": "SODA",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不接受远程或录播报告",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-07-09",
+  "decision": "",
+  "evidence": "https://www.siam.org/conferences-events/siam-conferences/soda27/submissions/",
+  "vconf": "高",
+  "vnote": "录用通知仅写2026年10月，无具体日"
+ },
+ {
+  "abbr": "STOC",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "无正式远程，需提前联系主席",
+  "author_limit": "5 篇",
+  "newbie": "设最佳学生论文奖与旅行资助",
+  "aa_deadline": "2026-11-02",
+  "decision": "2027-02-01",
+  "evidence": "https://acm-stoc.org/stoc2027/stoc2027-cfp.html",
+  "vconf": "高",
+  "vnote": "强制公开发布投稿并提交20-30分钟视频"
+ },
+ {
+  "abbr": "ICDE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设Ph.D. Symposium专场",
+  "aa_deadline": "2026-11-11",
+  "decision": "2027-02-10",
+  "evidence": "https://icde2027.github.io/important-dates.html",
+  "vconf": "高",
+  "vnote": "研究主会两轮，第一轮2026-06-11已截"
+ },
+ {
+  "abbr": "SIGIR",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设学生旅行资助与博士论坛",
+  "aa_deadline": "2027-01-21",
+  "decision": "2027-04-05",
+  "evidence": "https://sigir2027.org/",
+  "vconf": "高",
+  "vnote": "摘要2027-01-14；短论文等日期标TBA"
+ },
+ {
+  "abbr": "SIGKDD",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "7 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-07-26",
+  "decision": "2026-11-14",
+  "evidence": "https://kdd2027.kdd.org/research-track-call-for-papers/",
+  "vconf": "高",
+  "vnote": "第一轮；每轮每作者最多7篇，第二轮日期未公布"
+ }
+]

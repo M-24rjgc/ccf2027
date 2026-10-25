@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "ISCA",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "8 篇",
+  "newbie": "无资深作者可豁免审稿义务",
+  "aa_deadline": "2026-11-16",
+  "decision": "2027-03-26",
+  "evidence": "https://iscaconf.org/isca2027/submit/callforpapers.php",
+  "vconf": "高",
+  "vnote": "摘要2026-11-09截止；CFP未写现场报告要求"
+ },
+ {
+  "abbr": "PPoPP",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-03",
+  "decision": "2026-10-26",
+  "evidence": "https://conf.researchr.org/dates/hpca-cgo-ppopp-cc-2027",
+  "vconf": "高",
+  "vnote": "通知日2026-10-26临近；官网首页未列日期"
+ },
+ {
+  "abbr": "CHI",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "可交预录视频代替现场",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-10",
+  "decision": "2026-12-17",
+  "evidence": "https://chi2027.acm.org/authors/papers/",
+  "vconf": "高",
+  "vnote": "至少一位作者须2027-03-04前注册"
+ },
+ {
+  "abbr": "UbiComp/ISWC",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://sigchi.org/events/ubicomp-2027/",
+  "vconf": "低",
+  "vnote": "官网仅公布会期2027-10-03至10-07，无CFP"
+ },
+ {
+  "abbr": "WWW",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "口头可酌情线上，海报须现场",
+  "author_limit": "7 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-25",
+  "decision": "2027-01-04",
+  "evidence": "https://www2027.thewebconf.org/research-track-papers/",
+  "vconf": "高",
+  "vnote": "摘要2026-10-18；每类投稿每人限7篇"
+ },
+ {
+  "abbr": "INFOCOM",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "待确认",
+  "aa_deadline": "2026-07-31",
+  "decision": "2026-12-08",
+  "evidence": "https://infocom2027.ieee-infocom.org/authors",
+  "vconf": "高",
+  "vnote": "摘要2026-07-24；早期拒稿通知2026-10-09"
+ },
+ {
+  "abbr": "MobiCom",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-02",
+  "decision": "2026-11-19",
+  "evidence": "https://www.sigmobile.org/mobicom/2027/",
+  "vconf": "高",
+  "vnote": "夏季批次；摘要2026-08-26，冬季批次未定"
+ }
+]

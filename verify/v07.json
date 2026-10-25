@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "POPL",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "无法到场者提供远程报告选项",
+  "author_limit": "不限",
+  "newbie": "无特殊限制，设学生研究竞赛",
+  "aa_deadline": "2026-07-09",
+  "decision": "",
+  "evidence": "https://popl27.sigplan.org/track/POPL-2027-popl-research-papers",
+  "vconf": "高",
+  "vnote": "已明确作者受邀但非必须现场；无摘要截稿"
+ },
+ {
+  "abbr": "AAMAS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-08",
+  "decision": "2026-12-21",
+  "evidence": "https://warwick.ac.uk/fac/sci/dcs/aamas2027/",
+  "vconf": "高",
+  "vnote": "官网列2027主会日期，未写现场报告与远程政策"
+ },
+ {
+  "abbr": "COLING",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "5月6-7日线上虚拟会场",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-12",
+  "decision": "2027-02-10",
+  "evidence": "https://2027.coling-iccl.org/calls/main_conference_papers/",
+  "vconf": "高",
+  "vnote": "走ARR 10月轮，12-23需commitment"
+ },
+ {
+  "abbr": "COLT",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://learningtheory.org/colt2027/",
+  "vconf": "高",
+  "vnote": "仅公布会期6/28-7/2，各截止日均TBD"
+ },
+ {
+  "abbr": "ECAI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设STAIRS与博士生论坛",
+  "aa_deadline": "2027-04-14",
+  "decision": "2027-07-15",
+  "evidence": "https://ecai2027.org/",
+  "vconf": "高",
+  "vnote": "强调in person举办，但未写作者到场硬性要求"
+ },
+ {
+  "abbr": "ICAPS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://icaps27.icaps-conference.org/",
+  "vconf": "高",
+  "vnote": "官网仅有会期地点，无征稿信息"
+ },
+ {
+  "abbr": "ICRA",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "设卫星会场",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://2027.ieee-icra.org/",
+  "vconf": "中",
+  "vnote": "已发CFP公告，随文视频9/18-22；正刊截稿未见"
+ }
+]

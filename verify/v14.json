@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "PerCom",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "仅签证/健康等特殊情形例外",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-18",
+  "decision": "2026-12-18",
+  "evidence": "https://percom.org/call-for-papers/",
+  "vconf": "高",
+  "vnote": "截稿由9/11延至9/18 AoE；禁远程与预录视频"
+ },
+ {
+  "abbr": "ISMB",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.iscb.org/ismbeccb2027/key-dates",
+  "vconf": "低",
+  "vnote": "Key Dates页栏目为空；官网称线下+线上双轨"
+ },
+ {
+  "abbr": "MICCAI",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://conferences.miccai.org/2027/en/",
+  "vconf": "低",
+  "vnote": "仅公布会期9/27-10/1，CFP页404未上线"
+ },
+ {
+  "abbr": "RECOMB",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://recomb.org/recomb2027/",
+  "vconf": "低",
+  "vnote": "仅见会期2027-05-17至20，截稿未公布"
+ },
+ {
+  "abbr": "CoNEXT",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-04",
+  "decision": "2027-03-31",
+  "evidence": "https://conferences.sigcomm.org/co-next/2027/#!/cfp",
+  "vconf": "高",
+  "vnote": "两轮截稿(12/4、2027-06-04)；未提现场要求"
+ },
+ {
+  "abbr": "IMC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设最佳学生论文奖",
+  "aa_deadline": "2026-11-17",
+  "decision": "2027-02-25",
+  "evidence": "https://conferences.sigcomm.org/imc/2027/cfp/",
+  "vconf": "高",
+  "vnote": "两轮截稿(11/17、2027-04-07)；未提现场要求"
+ },
+ {
+  "abbr": "MobiSys",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-04",
+  "decision": "2027-03-06",
+  "evidence": "https://www.sigmobile.org/mobisys/2027/call_for_papers/",
+  "vconf": "高",
+  "vnote": "须至少一位作者按非学生费率注册并现场报告"
+ }
+]

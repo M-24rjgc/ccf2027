@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "CT-RSA",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-22",
+  "decision": "2026-12-03",
+  "evidence": "https://www.esat.kuleuven.be/cosic/events/ct-rsa-2027/",
+  "vconf": "高",
+  "vnote": "强烈要求现场报告，仅签证等特殊原因例外；通知日为暂定"
+ },
+ {
+  "abbr": "DFRWS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "设线上参会，注册待公布",
+  "author_limit": "不限",
+  "newbie": "设博士生论坛与学生奖学金",
+  "aa_deadline": "2026-10-09",
+  "decision": "2026-12-04",
+  "evidence": "https://dfrws.org/conferences/dfceurope2027/",
+  "vconf": "高",
+  "vnote": "全论文须现场报告；摘要10-02、全文10-09"
+ },
+ {
+  "abbr": "EuroS&P",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "7 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-02",
+  "decision": "2027-03-18",
+  "evidence": "https://www.ieee-security.org/TC/EuroSP2027/cfp.html",
+  "vconf": "中",
+  "vnote": "官网首屏无CFP，经搜索读到官方CFP要点；摘要注册11-25"
+ },
+ {
+  "abbr": "FC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-24",
+  "decision": "2026-11-12",
+  "evidence": "https://fc27.ifca.ai/cfp.html",
+  "vconf": "高",
+  "vnote": "只要求每篇至少1人注册，未明说现场报告"
+ },
+ {
+  "abbr": "ICDF2C",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "提供混合线上参会",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-15",
+  "decision": "2027-02-18",
+  "evidence": "https://icdf2c.eai-conferences.org/2027/",
+  "vconf": "高",
+  "vnote": "现场/线上要求未明文，仅页面提及hybrid"
+ },
+ {
+  "abbr": "IFIP WG 11.9",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设最佳学生论文奖",
+  "aa_deadline": "2026-10-25",
+  "decision": "2026-11-15",
+  "evidence": "https://www.ifip119.org/Conferences/WG11-9-CFP-2027.pdf",
+  "vconf": "高",
+  "vnote": "CFP为PDF；会议限约100人，现场要求未写明"
+ }
+]

@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "CVC",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://saiconference.com/CVC",
+  "vconf": "低",
+  "vnote": "官网仅公布2027-04-15/16会期，投稿页404"
+ },
+ {
+  "abbr": "EACL",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "线上与线下报告均可选",
+  "author_limit": "不限",
+  "newbie": "设学生研究研讨会SRW",
+  "aa_deadline": "2026-08-03",
+  "decision": "2026-11-12",
+  "evidence": "https://2027.eacl.org/calls/papers/",
+  "vconf": "高",
+  "vnote": "截稿为ARR投稿；须至少1位作者早注册"
+ },
+ {
+  "abbr": "ESANN",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "hybrid，可在线参会报告",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-18",
+  "decision": "2027-01-22",
+  "evidence": "https://www.esann.org/",
+  "vconf": "高",
+  "vnote": ""
+ },
+ {
+  "abbr": "EuroGP",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "hybrid举办，仍须作者到场",
+  "author_limit": "不限",
+  "newbie": "优秀学生论文需作者联署声明",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.evostar.org/2027/submit-paper/",
+  "vconf": "中",
+  "vnote": "官网未公布截稿/通知日期"
+ },
+ {
+  "abbr": "EvoApplications",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "hybrid举办，仍须作者到场",
+  "author_limit": "不限",
+  "newbie": "优秀学生论文需作者联署声明",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.evostar.org/2027/submit-paper/",
+  "vconf": "中",
+  "vnote": "官网未公布截稿/通知日期"
+ },
+ {
+  "abbr": "EvoCOP",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "hybrid举办，仍须作者到场",
+  "author_limit": "不限",
+  "newbie": "优秀学生论文需作者联署声明",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.evostar.org/2027/submit-paper/",
+  "vconf": "中",
+  "vnote": "官网未公布截稿/通知日期"
+ }
+]

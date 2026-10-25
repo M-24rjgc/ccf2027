@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "HSCC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-05",
+  "decision": "2027-01-28",
+  "evidence": "https://hscc.acm.org/2027/",
+  "vconf": "高",
+  "vnote": "2027与ICCPS合并为HSCC+ICCPS'27，未提参会形式"
+ },
+ {
+  "abbr": "ICALP",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://icalp.uj.edu.pl/",
+  "vconf": "低",
+  "vnote": "官网仅公布会期2027-07-05至09及举办地"
+ },
+ {
+  "abbr": "SOCG",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://cgweek27.computational-geometry.org/",
+  "vconf": "低",
+  "vnote": "CG Week 2027会期6/21-25，CFP页404；须CG Society会员"
+ },
+ {
+  "abbr": "CIDR",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "1 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.cidrdb.org/cidr2027/",
+  "vconf": "中",
+  "vnote": "官网写明每作者限投1篇，但未列任何截止日期"
+ },
+ {
+  "abbr": "DASFAA",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设Ph.D. Forum与青少年专场",
+  "aa_deadline": "2026-11-25",
+  "decision": "2027-01-25",
+  "evidence": "https://dasfaa2027.github.io/",
+  "vconf": "高",
+  "vnote": "研究/工业track，AoE23:59；Demo稿12-10截"
+ },
+ {
+  "abbr": "ECML-PKDD",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://ecmlpkdd.org/2027/",
+  "vconf": "低",
+  "vnote": "官网仅标题页，会期2027-08-30至09-03"
+ },
+ {
+  "abbr": "EDBT",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://edbticdt2027.github.io/",
+  "vconf": "低",
+  "vnote": "仅占位首页，会期2027-04-06至09，无CFP"
+ }
+]

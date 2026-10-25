@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "FM",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.fmeurope.org/feature/upcoming_conferences/",
+  "vconf": "低",
+  "vnote": "FME 仅列 FM 2027 会期 18-22 Oct 2027 Athens，无截稿日"
+ },
+ {
+  "abbr": "FSE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-02",
+  "decision": "2027-01-22",
+  "evidence": "https://conf.researchr.org/dates/fse-2027",
+  "vconf": "高",
+  "vnote": "初审2027-01-22，大修改终审2027-03-31"
+ },
+ {
+  "abbr": "ICSE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-06-30",
+  "decision": "2026-10-20",
+  "evidence": "https://conf.researchr.org/dates/icse-2027",
+  "vconf": "高",
+  "vnote": "摘要2026-06-23；大修改论文终审2026-12-18"
+ },
+ {
+  "abbr": "ISSTA",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-11",
+  "decision": "2027-04-20",
+  "evidence": "https://conf.researchr.org/home/issta-2027",
+  "vconf": "高",
+  "vnote": "强制摘要2027-01-08；终审2027-06-17"
+ },
+ {
+  "abbr": "OOPSLA",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不允许远程报告",
+  "author_limit": "5 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-14",
+  "decision": "2026-12-18",
+  "evidence": "https://2027.splashcon.org/track/splashoopsla2027",
+  "vconf": "高",
+  "vnote": "两轮制，R2截稿2027-04-07；每人每轮≤5篇"
+ },
+ {
+  "abbr": "OSDI",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "无远程，须全额注册",
+  "author_limit": "8 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-08",
+  "decision": "2027-03-16",
+  "evidence": "https://www.usenix.org/conference/osdi27/call-for-papers",
+  "vconf": "高",
+  "vnote": "摘要注册2026-12-01"
+ },
+ {
+  "abbr": "PLDI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-12",
+  "decision": "2027-03-04",
+  "evidence": "https://pldi27.sigplan.org/",
+  "vconf": "高",
+  "vnote": "终审2027-04-01"
+ }
+]

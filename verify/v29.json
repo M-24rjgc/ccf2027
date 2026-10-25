@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "ISIT",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-10",
+  "decision": "2027-03-27",
+  "evidence": "https://2027.ieee-isit.org/call-papers",
+  "vconf": "高",
+  "vnote": "录用须至少一位作者现场报告方入Xplore；CFP未写线上参会与篇数上限"
+ },
+ {
+  "abbr": "CHIIR",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设 Doctoral Consortium",
+  "aa_deadline": "2026-10-15",
+  "decision": "2026-12-15",
+  "evidence": "https://chiir2027.github.io/",
+  "vconf": "高",
+  "vnote": "官网称线下举办，但未明确作者到场条款；全文摘要截稿10-8"
+ },
+ {
+  "abbr": "CLEF",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://clef2027.clef-initiative.eu/",
+  "vconf": "高",
+  "vnote": "官网仅公布会期2027-09-14/17与Lab提案征集，论文CFP未出"
+ },
+ {
+  "abbr": "HICSS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "5 篇",
+  "newbie": "设 Doctoral Consortium",
+  "aa_deadline": "2026-06-15",
+  "decision": "2026-08-17",
+  "evidence": "https://hicss.hawaii.edu",
+  "vconf": "中",
+  "vnote": "抓取时官网维护，日期与5篇上限取自官网快照及minitrack CFP"
+ },
+ {
+  "abbr": "BIS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不提供线上参会",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-10",
+  "decision": "2027-03-05",
+  "evidence": "http://bisconf.org/2027/call-for-papers/",
+  "vconf": "高",
+  "vnote": "官网明示in-person only，remote attendance not supported"
+ },
+ {
+  "abbr": "MLSys",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "按合著人数配额，单作者限2篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-30",
+  "decision": "2027-02-28",
+  "evidence": "https://mlsys.org/Conferences/2027/CallForResearchPapers",
+  "vconf": "高",
+  "vnote": "配额制：单作者2篇、10人合作20篇；CFP未提现场报告要求"
+ }
+]

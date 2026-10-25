@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "SMI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-03-08",
+  "decision": "2027-05-03",
+  "evidence": "https://smiconf.github.io/2027/",
+  "vconf": "高",
+  "vnote": "现场报告与线上参会要求页面未公布"
+ },
+ {
+  "abbr": "FSCD",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://fscd-cade.science.ru.nl/",
+  "vconf": "中",
+  "vnote": "仅列CADE截稿2027-02-21，FSCD自身截稿未公布"
+ },
+ {
+  "abbr": "ECIR",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "欢迎硕博生及博士后投稿",
+  "aa_deadline": "2026-10-05",
+  "decision": "2026-12-07",
+  "evidence": "https://www.ecir2027.co.uk/",
+  "vconf": "高",
+  "vnote": "页首称第49届，About段称第48届"
+ },
+ {
+  "abbr": "ESWC",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://2027.eswc-conferences.org/",
+  "vconf": "低",
+  "vnote": "官网仅有时间地点，Call页无内容"
+ },
+ {
+  "abbr": "PAKDD",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.pakdd2027.org/",
+  "vconf": "低",
+  "vnote": "CFP页404，官网仅会议日期"
+ },
+ {
+  "abbr": "ASP-DAC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.aspdac.com/aspdac2027/author/",
+  "vconf": "中",
+  "vnote": "已公布录用名单，终稿2026-10-27，截稿日未列"
+ },
+ {
+  "abbr": "CCGRID",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-01",
+  "decision": "2027-02-01",
+  "evidence": "https://hpcclab.org/ccgrid27/",
+  "vconf": "高",
+  "vnote": "摘要截止2026-11-24"
+ }
+]

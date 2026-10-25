@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "EASE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-22",
+  "decision": "2027-03-12",
+  "evidence": "https://conf.researchr.org/dates/ease-2027",
+  "vconf": "高",
+  "vnote": "摘要2027-01-15截稿；research track页404，参会政策未知"
+ },
+ {
+  "abbr": "ICST",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-02",
+  "decision": "2027-02-20",
+  "evidence": "https://conf.researchr.org/track/icst-2027/icst-2027-research-papers",
+  "vconf": "高",
+  "vnote": "初筛12-22，重大修改1-31，终审2-20"
+ },
+ {
+  "abbr": "MSR",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设Junior PC辅导计划",
+  "aa_deadline": "2026-10-23",
+  "decision": "2027-01-08",
+  "evidence": "https://2027.msrconf.org/track/msr-2027-technical-papers",
+  "vconf": "高",
+  "vnote": "摘要2026-10-20、论文10-23已过期；早期拒稿12-03"
+ },
+ {
+  "abbr": "PEPM",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "可线上报告",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-23",
+  "decision": "",
+  "evidence": "https://popl27.sigplan.org/home/pepm-2027",
+  "vconf": "高",
+  "vnote": "单盲评审；官网未列录用通知日；会期2027-01-12"
+ },
+ {
+  "abbr": "REFSQ",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-12",
+  "decision": "2027-01-14",
+  "evidence": "https://2027.refsq.org/dates",
+  "vconf": "高",
+  "vnote": "摘要2026-11-05；CFP未写参会方式与篇数限制"
+ },
+ {
+  "abbr": "CPAL",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-25",
+  "decision": "2027-02-01",
+  "evidence": "https://cpal.cc/deadlines/",
+  "vconf": "高",
+  "vnote": "摘要注册11-13；Recent Spotlight截止2027-01-18"
+ }
+]

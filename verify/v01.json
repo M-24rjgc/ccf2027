@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "AAAI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-07-28",
+  "decision": "2026-11-30",
+  "evidence": "https://aaai.org/conference/aaai/aaai-27/",
+  "vconf": "高",
+  "vnote": "摘要07-21，全文07-28；日程页未写宣讲与远程政策"
+ },
+ {
+  "abbr": "ACL",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "in-person 与 virtual 两种宣讲均可",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-04",
+  "decision": "",
+  "evidence": "https://2027.aclweb.org/calls/main/",
+  "vconf": "高",
+  "vnote": "须至少一位作者注册并宣讲；录用通知日TBD"
+ },
+ {
+  "abbr": "CVPR",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "新账号无机构邮箱需审核约两周",
+  "aa_deadline": "2026-11-16",
+  "decision": "2027-02-25",
+  "evidence": "https://cvpr.thecvf.com/Conferences/2027/CallForPapers",
+  "vconf": "高",
+  "vnote": "论文注册11-10；CFP未明写现场宣讲要求"
+ },
+ {
+  "abbr": "ICCV",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://iccv.thecvf.com/Conferences/2027",
+  "vconf": "低",
+  "vnote": "官网仅公布时间地点(10/3-7)，CFP未出"
+ },
+ {
+  "abbr": "ICLR",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "20 篇",
+  "newbie": "首投者最多1篇无互惠审稿论文",
+  "aa_deadline": "2026-09-25",
+  "decision": "2026-12-16",
+  "evidence": "https://iclr.cc/Conferences/2027/AuthorGuidelines",
+  "vconf": "高",
+  "vnote": "署名≥3篇须审6篇；出席形式未明示"
+ },
+ {
+  "abbr": "ACM SIGGRAPH",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://s2027.siggraph.org/",
+  "vconf": "低",
+  "vnote": "第三方站点称Stage1为2027-01-21，官网未见"
+ },
+ {
+  "abbr": "IEEE VR",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "仅特殊情况允许线上宣讲",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-31",
+  "decision": "2027-01-07",
+  "evidence": "https://ieeevr.org/2027/contribute/papers",
+  "vconf": "高",
+  "vnote": "截稿已过(2026-08-31)；资深作者须任审稿人"
+ }
+]

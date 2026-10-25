@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "INTERACT",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-01",
+  "decision": "2027-03-08",
+  "evidence": "https://interact2027.org/",
+  "vconf": "高",
+  "vnote": "官网仅列全篇论文截稿与通知日"
+ },
+ {
+  "abbr": "WHC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-29",
+  "decision": "2027-04-16",
+  "evidence": "https://2027.worldhaptics.org/",
+  "vconf": "高",
+  "vnote": "官网标注日期为暂定，可能调整"
+ },
+ {
+  "abbr": "ICIC",
+  "vstatus": "官网不可达",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "",
+  "vconf": "低",
+  "vnote": "ic-icc.cn 多次抓取失败，无法核实"
+ },
+ {
+  "abbr": "ICC",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "无线上参会，全线下举办",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-30",
+  "decision": "2027-01-15",
+  "evidence": "https://icc2027.ieee-icc.org/authors/call-symposium-papers",
+  "vconf": "高",
+  "vnote": "官网明确 fully in-person"
+ },
+ {
+  "abbr": "ICCCN",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不允许线上报告",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-12",
+  "decision": "2027-04-16",
+  "evidence": "http://www.icccn.org/icccn27/call-for-papers/index.html",
+  "vconf": "中",
+  "vnote": "线下要求见官方CFP，日期来自第三方汇总"
+ },
+ {
+  "abbr": "WCNC",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "线下举办，无线上参会",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-26",
+  "decision": "2027-01-15",
+  "evidence": "https://wcnc2027.ieee-wcnc.org/",
+  "vconf": "高",
+  "vnote": "官网称 conducted in person"
+ }
+]

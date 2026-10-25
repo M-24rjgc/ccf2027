@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "WoWMoM",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不提供线上报告",
+  "author_limit": "不限",
+  "newbie": "设WIP论文与研究生论坛",
+  "aa_deadline": "2026-12-01",
+  "decision": "2027-02-10",
+  "evidence": "https://wowmom2027.dii.unipi.it/call-for-papers.html",
+  "vconf": "高",
+  "vnote": "明确为in-person会议，远程报告不接受"
+ },
+ {
+  "abbr": "ACISP",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "未提供线上参会",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-30",
+  "decision": "2027-01-15",
+  "evidence": "https://acisp.org/cfp.html",
+  "vconf": "高",
+  "vnote": "两轮：Round2 2027-03-01截稿/04-16通知"
+ },
+ {
+  "abbr": "ACNS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不接收远程报告与视频",
+  "author_limit": "不限",
+  "newbie": "设最佳学生论文奖1500欧",
+  "aa_deadline": "2026-09-24",
+  "decision": "2026-11-26",
+  "evidence": "https://acns2027.isg.rhul.ac.uk/calls/papers",
+  "vconf": "高",
+  "vnote": "两轮：Cycle2 2027-01-21截稿/03-25通知"
+ },
+ {
+  "abbr": "AsiaCCS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "未提供虚拟参会",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-21",
+  "decision": "2026-11-13",
+  "evidence": "https://asiaccs2027.cityu.edu.mo/call-for-papers/index.html",
+  "vconf": "高",
+  "vnote": "两轮：Cycle2 2026-12-11截稿/2027-03-31通知"
+ },
+ {
+  "abbr": "BlockSys",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设最佳学生论文奖",
+  "aa_deadline": "2026-11-30",
+  "decision": "2026-12-31",
+  "evidence": "https://blocksys.info/2027/call-for-papers/",
+  "vconf": "高",
+  "vnote": "两轮：Round2 2027-01-31截稿/03-15通知；未写参会方式"
+ },
+ {
+  "abbr": "CODASPY",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-23",
+  "decision": "2027-01-25",
+  "evidence": "https://www.codaspy.org/2027/cfp.html",
+  "vconf": "高",
+  "vnote": "摘要11-16截止；未写参会形式与作者篇数上限"
+ }
+]

@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "NOSSDAV",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-11",
+  "decision": "2027-02-01",
+  "evidence": "https://nossdav.org/2027",
+  "vconf": "高",
+  "vnote": "单轨工作坊；截稿日原文未标年份"
+ },
+ {
+  "abbr": "SECON",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "线下实体会议，无线上",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-30",
+  "decision": "2027-02-15",
+  "evidence": "https://secon2027.ieee-secon.org/",
+  "vconf": "高",
+  "vnote": "会期2027-05-05至07，官网称实体线下会议"
+ },
+ {
+  "abbr": "SenSys",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-05",
+  "decision": "2027-01-28",
+  "evidence": "https://sensys.acm.org/2027/",
+  "vconf": "高",
+  "vnote": "两轮截稿；一轮6/5已过，此为二轮"
+ },
+ {
+  "abbr": "CHES",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-15",
+  "decision": "2027-03-15",
+  "evidence": "https://ches.iacr.org/2027/",
+  "vconf": "高",
+  "vnote": "TCHES全年四期滚动，此为最近一期"
+ },
+ {
+  "abbr": "CSFW",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-28",
+  "decision": "2027-04-05",
+  "evidence": "https://www.ieee-security.org/TC/CSF2027/",
+  "vconf": "高",
+  "vnote": "三轮截稿；夏/秋轮已过，此为冬季轮"
+ },
+ {
+  "abbr": "DSN",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "学生可申请差旅资助",
+  "aa_deadline": "2026-12-02",
+  "decision": "2027-03-18",
+  "evidence": "https://dsn2027-berlin.github.io/important-dates/",
+  "vconf": "高",
+  "vnote": "Research Track；摘要11/25，含早期拒稿1/26"
+ },
+ {
+  "abbr": "FSE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-01",
+  "decision": "",
+  "evidence": "https://fse.iacr.org/2027/",
+  "vconf": "高",
+  "vnote": "投稿经ToSC 2027 Issue 1，通知日未公布"
+ }
+]

@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "PKC",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "必要时可远程报告",
+  "author_limit": "不限",
+  "newbie": "学生演讲免注册费+旅费补助",
+  "aa_deadline": "2026-08-16",
+  "decision": "2026-11-26",
+  "evidence": "https://pkc.iacr.org/2027/callforpapers.php",
+  "vconf": "高",
+  "vnote": "两轮评审，10-09首轮通知；仅PC成员限3-4篇"
+ },
+ {
+  "abbr": "CAiSE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-15",
+  "decision": "2027-02-10",
+  "evidence": "https://deal.us.es/caise27/calls/dates/",
+  "vconf": "高",
+  "vnote": "摘要2026-11-04必交；摄影稿2027-03-15"
+ },
+ {
+  "abbr": "ECOOP",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-19",
+  "decision": "2027-01-28",
+  "evidence": "https://2027.ecoop.org/track/ecoop-2027-technical-papers",
+  "vconf": "高",
+  "vnote": "两轮投稿：R2截止2027-02-11，通知2027-04-08"
+ },
+ {
+  "abbr": "ETAPS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://etaps.org/2027",
+  "vconf": "低",
+  "vnote": "官网仅公布会期2027-04-10至15，CFP页404，截稿由各成员会议单独发布"
+ },
+ {
+  "abbr": "HotOS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "仅签证等特殊情况例外",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-01",
+  "decision": "2027-04-09",
+  "evidence": "https://sigops.org/s/conferences/hotos/2027/cfp.html",
+  "vconf": "高",
+  "vnote": "每篇录用论文仅2个参会邀请，注册名额受限"
+ },
+ {
+  "abbr": "ICFP",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不可抗力可远程报告",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-25",
+  "decision": "2027-06-11",
+  "evidence": "https://icfp27.sigplan.org/",
+  "vconf": "高",
+  "vnote": "05-07为有条件录用通知，06-11为最终通知"
+ },
+ {
+  "abbr": "ICPC",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "仅旅行受限例外",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-05",
+  "decision": "2027-01-14",
+  "evidence": "https://conf.researchr.org/track/icpc-2027/icpc-2027-research-track",
+  "vconf": "高",
+  "vnote": "研究track摘要2026-10-29；主席及学生不得投稿"
+ }
+]

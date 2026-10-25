@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "IJCAI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-11",
+  "decision": "2027-04-21",
+  "evidence": "https://2027.ijcai.org/",
+  "vconf": "高",
+  "vnote": "摘要截止2027-01-04；日程页未提参会/篇数政策"
+ },
+ {
+  "abbr": "KR",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://kr.org/KR2027/",
+  "vconf": "低",
+  "vnote": "官网仅会议信息无CFP；第三方称截稿2027-04-28"
+ },
+ {
+  "abbr": "NAACL",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-12",
+  "decision": "2027-02-10",
+  "evidence": "https://2027.naacl.org/",
+  "vconf": "高",
+  "vnote": "走ARR，commitment截止2026-12-23"
+ },
+ {
+  "abbr": "DCC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-09",
+  "decision": "",
+  "evidence": "https://datacompressionconference.org/call-for-papers/",
+  "vconf": "高",
+  "vnote": "由10-02延期至10-09（美太平洋时间）；通知日未公布"
+ },
+ {
+  "abbr": "EuroVis",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://eurovis27.github.io/web/submissions/all-deadlines/",
+  "vconf": "低",
+  "vnote": "仅公布workshop/STAR日期，full paper截稿未出"
+ },
+ {
+  "abbr": "Eurographics",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://eg2027.isti.cnr.it/",
+  "vconf": "低",
+  "vnote": "仅见STAR截稿2026-10-19 AoE；full paper页404"
+ },
+ {
+  "abbr": "ICASSP",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-23",
+  "decision": "2027-01-13",
+  "evidence": "https://2027.ieeeicassp.org/call-for-papers/",
+  "vconf": "高",
+  "vnote": "终稿2027-01-27，作者注册2027-02-10"
+ }
+]

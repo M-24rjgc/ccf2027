@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "NSDI",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "未提供线上参会",
+  "author_limit": "8 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-17",
+  "decision": "2026-12-08",
+  "evidence": "https://www.usenix.org/conference/nsdi27/call-for-papers",
+  "vconf": "高",
+  "vnote": "两轮制，秋季轮全文9/17；须全价注册现场报告"
+ },
+ {
+  "abbr": "SIGCOMM",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "设远程 pod，报告仍须到场",
+  "author_limit": "8 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-02",
+  "decision": "",
+  "evidence": "https://conferences.sigcomm.org/sigcomm/2027/cfp/",
+  "vconf": "高",
+  "vnote": "单轮；未公布录用通知日；无 rebuttal"
+ },
+ {
+  "abbr": "CCS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.sigsac.org/ccs/CCS2027/",
+  "vconf": "低",
+  "vnote": "官网仅有会期地点，无 CFP 内容"
+ },
+ {
+  "abbr": "EUROCRYPT",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-17",
+  "decision": "2027-01-18",
+  "evidence": "https://eurocrypt.iacr.org/2027/papersubmission.php",
+  "vconf": "高",
+  "vnote": "须由作者之一现场报告；论文录制"
+ },
+ {
+  "abbr": "NDSS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "6 篇/轮",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-19",
+  "decision": "2026-11-24",
+  "evidence": "https://www.ndss-symposium.org/ndss2027/submissions/call-for-papers/",
+  "vconf": "高",
+  "vnote": "夏/秋两轮均截止；仅称须按参会政策报告"
+ },
+ {
+  "abbr": "S&P",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://sp2027.ieee-security.org/index.html",
+  "vconf": "低",
+  "vnote": "官网无 CFP 正文，cfp.html 返回 404"
+ },
+ {
+  "abbr": "USENIX Security",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "未提供线上参会",
+  "author_limit": "7 篇/轮",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-26",
+  "decision": "2027-05-06",
+  "evidence": "https://www.usenix.org/conference/usenixsecurity27/call-for-papers",
+  "vconf": "高",
+  "vnote": "两轮制，取第2轮；须全价注册现场报告"
+ }
+]

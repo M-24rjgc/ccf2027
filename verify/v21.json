@@ -1,0 +1,80 @@
+[
+ {
+  "abbr": "ETS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.ets2027.co.uk/",
+  "vconf": "中",
+  "vnote": "官网仅公布会期5/24-28与场地，截稿日未发布"
+ },
+ {
+  "abbr": "ISPD",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-28",
+  "decision": "2026-11-05",
+  "evidence": "https://ispd.cc/ispd2027/",
+  "vconf": "高",
+  "vnote": "摘要9/21，全文9/28，报告人注册2027-01-07"
+ },
+ {
+  "abbr": "CSCWD",
+  "vstatus": "官网不可达",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "",
+  "vconf": "低",
+  "vnote": "2027.cscwd.org HTTP/HTTPS 均无法访问"
+ },
+ {
+  "abbr": "DIS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://dis.acm.org/2027/",
+  "vconf": "中",
+  "vnote": "官网仅有会期6/28-7/2与主题，投稿通道未开"
+ },
+ {
+  "abbr": "GI",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://conferences.graphicsinterface.org/2027",
+  "vconf": "中",
+  "vnote": "官网仅公布会期6/15-18，称细节稍后发布"
+ },
+ {
+  "abbr": "IDC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-25",
+  "decision": "",
+  "evidence": "https://idc.acm.org/2027/",
+  "vconf": "高",
+  "vnote": "长/短文截稿2027-01-25，录用通知日未列"
+ }
+]

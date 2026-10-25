@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "ICDM",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-06-06",
+  "decision": "2027-08-16",
+  "evidence": "https://icdm2027-website.onrender.com/",
+  "vconf": "中",
+  "vnote": "日期页已公布，CFP正文标注coming soon"
+ },
+ {
+  "abbr": "ICDT",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://edbticdt2027.github.io/",
+  "vconf": "低",
+  "vnote": "官网仅落地页，无CFP入口"
+ },
+ {
+  "abbr": "PODS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-10",
+  "decision": "2027-03-01",
+  "evidence": "https://2027.sigmod.org/calls_papers_important_dates.shtml",
+  "vconf": "高",
+  "vnote": "两轮制，此为第2轮周期；第1轮5月已过"
+ },
+ {
+  "abbr": "RecSys",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://recsys.acm.org/recsys27/",
+  "vconf": "低",
+  "vnote": "官网仅会议信息，CFP页404"
+ },
+ {
+  "abbr": "WSDM",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "不设远程，需他人代讲",
+  "author_limit": "10 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-24",
+  "decision": "2026-11-02",
+  "evidence": "https://wsdm-conference.org/2027/cffp.html",
+  "vconf": "高",
+  "vnote": "摘要8月17日已过；正文截稿为2026-08-24"
+ },
+ {
+  "abbr": "DATE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设PhD Forum",
+  "aa_deadline": "2026-09-20",
+  "decision": "2026-11-23",
+  "evidence": "https://www.date-conference.com/DATE2027-Call-for-Papers.pdf",
+  "vconf": "高",
+  "vnote": "9月13日注册摘要，9月20日全文截稿"
+ },
+ {
+  "abbr": "FPGA",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "旅行受限可特殊安排",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-08",
+  "decision": "2026-11-24",
+  "evidence": "https://www.isfpga.org/",
+  "vconf": "高",
+  "vnote": "摘要10月1日；正文10月8日，均无延期"
+ }
+]

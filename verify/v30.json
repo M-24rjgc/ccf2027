@@ -1,0 +1,80 @@
+[
+  {
+    "abbr": "SAI",
+    "vstatus": "未找到",
+    "onsite": "待确认",
+    "remote": "待确认",
+    "author_limit": "不限",
+    "newbie": "无特殊限制",
+    "aa_deadline": "",
+    "decision": "",
+    "evidence": "https://saiconference.com/Computing",
+    "vconf": "低",
+    "vnote": "官网仅给出会期2027-07-08/09，未见截稿日"
+  },
+  {
+    "abbr": "SIGCSE",
+    "vstatus": "已核实",
+    "onsite": "必须到场",
+    "remote": "无远程参会选项",
+    "author_limit": "不限",
+    "newbie": "无特殊限制",
+    "aa_deadline": "2026-07-03",
+    "decision": "2026-09-14",
+    "evidence": "https://2027.sigcse-ts.acm.org/",
+    "vconf": "高",
+    "vnote": "论文摘要2026-06-26，一轮正文2026-07-03"
+  },
+  {
+    "abbr": "MMSys",
+    "vstatus": "未找到",
+    "onsite": "待确认",
+    "remote": "待确认",
+    "author_limit": "不限",
+    "newbie": "无特殊限制",
+    "aa_deadline": "",
+    "decision": "",
+    "evidence": "https://2027.acmmmsys.org",
+    "vconf": "低",
+    "vnote": "官网仅有会期，CFP子页404"
+  },
+  {
+    "abbr": "NOMS",
+    "vstatus": "已核实",
+    "onsite": "待确认",
+    "remote": "待确认",
+    "author_limit": "不限",
+    "newbie": "无特殊限制",
+    "aa_deadline": "2026-11-09",
+    "decision": "2027-02-15",
+    "evidence": "https://noms2027.ieee-noms.org/authors/call-technical-session-paper",
+    "vconf": "高",
+    "vnote": "CFP未写现场报告与远程参会要求"
+  },
+  {
+    "abbr": "SAIS",
+    "vstatus": "已核实",
+    "onsite": "待确认",
+    "remote": "待确认",
+    "author_limit": "不限",
+    "newbie": "无特殊限制",
+    "aa_deadline": "2027-02-04",
+    "decision": "2027-03-16",
+    "evidence": "https://www.usenix.org/conference/sais27/call-for-papers",
+    "vconf": "高",
+    "vnote": "首年新会议，Preliminary CFP"
+  },
+  {
+    "abbr": "SATML",
+    "vstatus": "已核实",
+    "onsite": "必须到场",
+    "remote": "不设远程报告，仅线下",
+    "author_limit": "不限",
+    "newbie": "无特殊限制",
+    "aa_deadline": "2026-09-29",
+    "decision": "2026-12-16",
+    "evidence": "https://satml.org/call-for-papers",
+    "vconf": "高",
+    "vnote": "摘要注册2026-09-22必填"
+  }
+]

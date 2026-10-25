@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "HiPEAC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-06-01",
+  "decision": "2026-11-15",
+  "evidence": "https://www.hipeac.net/2027/glasgow/",
+  "vconf": "高",
+  "vnote": "journal-first 模式，投稿ACM TACO；6/1前投稿方可入选2027"
+ },
+ {
+  "abbr": "ICDCS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://icdcs2027.icdcs.org/",
+  "vconf": "低",
+  "vnote": "官网仅公布会期2027-07-05至08，所有日期TBD"
+ },
+ {
+  "abbr": "ICS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-07",
+  "decision": "2027-03-12",
+  "evidence": "https://klab-ai3.github.io/ics2027/",
+  "vconf": "高",
+  "vnote": "摘要2026-12-01；早期拒稿2027-02-11"
+ },
+ {
+  "abbr": "IEEE/ACM CGO",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-09-10",
+  "decision": "2026-11-09",
+  "evidence": "https://2027.cgo.org/dates",
+  "vconf": "高",
+  "vnote": "两轮投稿：R1截稿2026-06-11、通知2026-08-03"
+ },
+ {
+  "abbr": "IPDPS",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "8 篇",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-08",
+  "decision": "2027-02-02",
+  "evidence": "https://www.ipdps.org/ipdps2027/2027-call-for-papers.html",
+  "vconf": "高",
+  "vnote": "摘要2026-10-01；同作者限投8篇；正文强调现场报告"
+ },
+ {
+  "abbr": "ISCAS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://2027.ieee-iscas.org/",
+  "vconf": "低",
+  "vnote": "官网仅有会期2027-06-06至09，无截稿信息"
+ },
+ {
+  "abbr": "MSST",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.msstconference.org/",
+  "vconf": "低",
+  "vnote": "仅公布会期2027-05-17至21，官网仍为MSST 2026内容"
+ }
+]

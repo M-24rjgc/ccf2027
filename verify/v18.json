@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "FG",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "无线上参会，现场报告",
+  "author_limit": "不限",
+  "newbie": "学生可申请旅费资助",
+  "aa_deadline": "2026-10-23",
+  "decision": "2026-12-20",
+  "evidence": "https://fg2027.ieee-biometrics.org/?p=1272",
+  "vconf": "高",
+  "vnote": "截稿由10/16延至10/23，in-person-only"
+ },
+ {
+  "abbr": "GECCO",
+  "vstatus": "2027CFP未发布",
+  "onsite": "必须到场",
+  "remote": "无线上参会",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://gecco-2027.sigevo.org/HomePage",
+  "vconf": "低",
+  "vnote": "官网标in person only；截稿日未公布"
+ },
+ {
+  "abbr": "ICDAR",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-28",
+  "decision": "2027-05-15",
+  "evidence": "https://icdar2027.org/important-dates",
+  "vconf": "高",
+  "vnote": "会期8/18-22；含IJDAR期刊轨11/15截稿"
+ },
+ {
+  "abbr": "ICPR",
+  "vstatus": "已核实",
+  "onsite": "允许远程",
+  "remote": "全虚拟线上会议，注册费低",
+  "author_limit": "不限",
+  "newbie": "学生作者注册费约400美元",
+  "aa_deadline": "2027-03-08",
+  "decision": "2027-05-31",
+  "evidence": "https://www.icpr2027.com/web/dates",
+  "vconf": "高",
+  "vnote": "首次全虚拟ICPR，日期标注为暂定"
+ },
+ {
+  "abbr": "IEEE CEC",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-28",
+  "decision": "2027-04-07",
+  "evidence": "https://ieeecec.org/2027/authors/call-for-papers",
+  "vconf": "高",
+  "vnote": "另有短论文轨3/15截稿；明确不延期"
+ },
+ {
+  "abbr": "IJCNN",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-31",
+  "decision": "2027-03-15",
+  "evidence": "https://ijcnn.org/2027/authors/call-for-papers",
+  "vconf": "高",
+  "vnote": "全文限6页IEEE双栏；12/01开放投稿"
+ },
+ {
+  "abbr": "IROS",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://2027.ieee-iros.org/",
+  "vconf": "低",
+  "vnote": "官网仅公布会期9/27-10/1，截稿日未发布"
+ }
+]

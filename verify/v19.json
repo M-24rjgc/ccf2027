@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "3DV",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-28",
+  "decision": "2026-12-02",
+  "evidence": "https://3dvconf.github.io/2027/dates",
+  "vconf": "高",
+  "vnote": "两阶段通知：10-27初步、12-02最终；主页写明in-person举办"
+ },
+ {
+  "abbr": "CGI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-28",
+  "decision": "2027-05-10",
+  "evidence": "https://www.cgs-network.org/cgi27/important-dates/",
+  "vconf": "高",
+  "vnote": "双轨：TVC轨2-28截稿、5-10录用；LNCS轨4-20截稿、5-31录用"
+ },
+ {
+  "abbr": "CVM",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-10-26",
+  "decision": "2026-12-15",
+  "evidence": "http://iccvm.org/2027/",
+  "vconf": "高",
+  "vnote": "摘要10-26（原10-23已延后），全文同10-26，23:59 GMT"
+ },
+ {
+  "abbr": "GMP",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://gmp-conference-2027.github.io/gmp2027/",
+  "vconf": "低",
+  "vnote": "官网仅剩标题，CFP子页404，未见任何日期"
+ },
+ {
+  "abbr": "ICIP",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://2027.ieeeicip.org/",
+  "vconf": "低",
+  "vnote": "CFP页误挂ICASSP2023旧内容，无2027投稿信息"
+ },
+ {
+  "abbr": "MMM",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-30",
+  "decision": "2026-10-19",
+  "evidence": "https://www.mmm2027.net/",
+  "vconf": "高",
+  "vnote": "正则论文8-30，demo/VBS 9-22；会期2027-01-05至08"
+ },
+ {
+  "abbr": "PacificVis",
+  "vstatus": "未找到",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://pacificvis2027.github.io/",
+  "vconf": "低",
+  "vnote": "CFP已发布但子页404，未取到日期"
+ }
+]

@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "RTAS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-11-05",
+  "decision": "2027-01-28",
+  "evidence": "https://2027.rtas.org/cfp/",
+  "vconf": "高",
+  "vnote": "截稿2026-11-05(AoE, firm)；通知日官网标注 tentative"
+ },
+ {
+  "abbr": "SIGMETRICS",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-11",
+  "decision": "2027-03-10",
+  "evidence": "https://www.sigmetrics.org/sigmetrics2027/",
+  "vconf": "高",
+  "vnote": "三轮投稿制，夏/秋轮已过，末轮截稿2027-01-11"
+ },
+ {
+  "abbr": "SPAA",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-01-29",
+  "decision": "2027-04-10",
+  "evidence": "https://spaa.acm.org/spaa-2027-call-for-papers/",
+  "vconf": "中",
+  "vnote": "两轮投稿，第二轮截稿2027-01-29；CFP日期未标年份"
+ },
+ {
+  "abbr": "GROUP",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-03-31",
+  "decision": "2026-08-25",
+  "evidence": "https://group.acm.org/conferences/group27/",
+  "vconf": "中",
+  "vnote": "两轮投稿均已截止；官网称线下举办但未明示作者到场要求"
+ },
+ {
+  "abbr": "ICWSM",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.icwsm.org/2027/",
+  "vconf": "低",
+  "vnote": "2027主页仅介绍，无投稿日期；CFP子页404"
+ },
+ {
+  "abbr": "IUI",
+  "vstatus": "已核实",
+  "onsite": "必须到场",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-08-20",
+  "decision": "2026-11-23",
+  "evidence": "https://iui.acm.org/2027/call-for-papers/",
+  "vconf": "高",
+  "vnote": "截稿2026-08-20已过；须至少一位作者注册并现场报告"
+ },
+ {
+  "abbr": "MobileHCI",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-17",
+  "decision": "2027-04-15",
+  "evidence": "https://mobilehci.acm.org/2027/",
+  "vconf": "高",
+  "vnote": "摘要2027-02-10；仅要求至少一位作者全额注册，最终通知06-17"
+ }
+]

@@ -1,0 +1,12 @@
+{
+ "source": "https://aclrollingreview.org/dates",
+ "checked": "2026-10-25",
+ "cadence": "ARR 自 2025 年 5 月起改为 10 周一轮、每年约 5 轮，投稿日不再固定为每月某日。",
+ "upcoming_note": "官网提到 ACL 2027 对应 cycle 的投稿截止在 2027 年 1 月，但完整日期尚未列出；建议每月核对 aclrollingreview.org/dates。",
+ "cycles": [
+  {"name": "March 2026", "submission": "2026-03-16", "reviewer_reg": "2026-03-18", "reviews_due": "2026-04-20", "author_response": "04-28 → 05-04", "meta_release": "2026-05-21", "cycle_end": "2026-05-24"},
+  {"name": "May 2026", "submission": "2026-05-25", "reviewer_reg": "2026-05-27", "reviews_due": "2026-07-02", "author_response": "07-08 → 07-14", "meta_release": "2026-07-30", "cycle_end": "2026-08-02"},
+  {"name": "August 2026", "submission": "2026-08-03", "reviewer_reg": "2026-08-05", "reviews_due": "2026-09-07", "author_response": "09-14 → 09-24", "meta_release": "2026-10-08", "cycle_end": "2026-10-11"},
+  {"name": "October 2026", "submission": "2026-10-12", "reviewer_reg": "2026-10-14", "reviews_due": "2026-11-16", "author_response": "11-24 → 11-30", "meta_release": "2026-12-17", "cycle_end": "2026-12-20"}
+ ]
+}

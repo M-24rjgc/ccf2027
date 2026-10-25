@@ -1,0 +1,93 @@
+[
+ {
+  "abbr": "ICME",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2026-12-30",
+  "decision": "2027-03-24",
+  "evidence": "https://2027.ieeeicme.org/authors/call-for-papers",
+  "vconf": "高",
+  "vnote": "CFP未写到场要求与投稿篇数上限"
+ },
+ {
+  "abbr": "ICMR",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://www.icmr2027.org/",
+  "vconf": "中",
+  "vnote": "官网仅公布会期，CFP页返回404"
+ },
+ {
+  "abbr": "InterSpeech",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "无特殊限制",
+  "aa_deadline": "2027-02-09",
+  "decision": "2027-06-02",
+  "evidence": "https://interspeech2027.org/",
+  "vconf": "高",
+  "vnote": "CFP页未上线，日期取自官网首页"
+ },
+ {
+  "abbr": "SGP",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://igs2027singapore.github.io/",
+  "vconf": "中",
+  "vnote": "IGS2027称SGP另设官网，尚未上线"
+ },
+ {
+  "abbr": "SPM",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://igs2027singapore.github.io/",
+  "vconf": "中",
+  "vnote": "IGS2027称SPM另设官网，尚未上线"
+ },
+ {
+  "abbr": "CADE",
+  "vstatus": "已核实",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "不限",
+  "newbie": "设最佳学生论文奖",
+  "aa_deadline": "2027-02-22",
+  "decision": "2027-05-17",
+  "evidence": "https://fscd-cade.science.ru.nl/calls/papers-cade",
+  "vconf": "高",
+  "vnote": "首页时间线2/14、2/21，CFP页为2/15、2/22"
+ },
+ {
+  "abbr": "CCC",
+  "vstatus": "2027CFP未发布",
+  "onsite": "待确认",
+  "remote": "待确认",
+  "author_limit": "待确认",
+  "newbie": "待确认",
+  "aa_deadline": "",
+  "decision": "",
+  "evidence": "https://computationalcomplexity.org/",
+  "vconf": "中",
+  "vnote": "仅公布会期地点，2027届CFP未发布"
+ }
+]
