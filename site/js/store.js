@@ -7,6 +7,7 @@ const ls = {
 };
 
 const DEFAULTS = {
+  mode: "shared",
   baseUrl: "https://api.stepfun.com/step_plan/v1",
   model: "step-5-preview",
   stepKey: "",

@@ -1,6 +1,7 @@
 // Agent：OpenAI 兼容 Chat Completions（StepFun）+ 知识库工具 + DeepSeek Search/Fetch
 import { DB, filterConferences, searchWiki, readIndex, readPage, graphNeighbors, resolveId, nowBJText } from "./data.js";
-import { Settings, Pending } from "./store.js";
+import { Settings, Pending } from "./store.js?v=shared-20261025";
+import { sharedMode, askShared } from "./service.js?v=shared-20261025";
 
 // ---------------------------------------------------------------- 推理等级路由
 const HIGH_RE = /推荐|适合|投哪|投什么|选会|候选|哪些会|哪几个|哪个会|对比|比较|规划|方案|安排|摘要|abstract|帮我选|帮我列|评估|权衡|风险|我做|我的研究|我研究|研究方向|我的论文/i;
@@ -193,6 +194,7 @@ async function streamChat(body, signal, onDelta) {
  * ui: { onRoute, onDelta, onStep, onToolStart, onToolEnd, onPending, signal }
  */
 export async function ask(history, text, ui) {
+  if (sharedMode()) return askShared(history, text, ui);
   if (!Settings.get("stepKey")) throw new Error("请先在「设置」里填写模型 API Key");
   const route = routeEffort(text);
   ui.onRoute?.(route);

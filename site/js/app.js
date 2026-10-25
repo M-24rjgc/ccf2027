@@ -1,6 +1,7 @@
 import { DB, loadWiki, liveState, resolveId, nowBJText } from "./data.js";
-import { ask, routeEffort } from "./agent.js";
-import { Settings, Pending } from "./store.js";
+import { ask, routeEffort } from "./agent.js?v=shared-20261025";
+import { Settings, Pending } from "./store.js?v=shared-20261025";
+import { sharedMode, serviceHealth } from "./service.js?v=shared-20261025";
 import { initGraph, applyToggles, focus, highlightPath, clearHighlight, findNode, fitAll, resize } from "./graph.js";
 
 const $ = s => document.querySelector(s);
@@ -186,24 +187,36 @@ $("#pend-copy").onclick = async () => {
 };
 
 // ---------------------------------------------------------------- 设置
-function refreshBanner() { $("#banner").hidden = !!Settings.get("stepKey"); }
+function refreshBanner() { $("#banner").hidden = sharedMode() || !!Settings.get("stepKey"); }
+function refreshSettingsMode() {
+  $("#personal-settings").hidden = $("#settings-form").elements.mode.value !== "personal";
+}
 function openSettings() {
   const f = $("#settings-form");
   for (const [k, v] of Object.entries(Settings.all())) if (f.elements[k]) f.elements[k].value = v;
   $("#settings-msg").textContent = "";
+  refreshSettingsMode();
   $("#dlg-settings").showModal();
 }
 $("#btn-settings").onclick = openSettings;
 $("#banner-set").onclick = openSettings;
+$("#settings-form").elements.mode.onchange = refreshSettingsMode;
 $("#dlg-settings").addEventListener("close", () => {
   if ($("#dlg-settings").returnValue !== "save") return;
   const f = $("#settings-form");
-  for (const k of ["baseUrl", "model", "stepKey", "deepseekKey", "repo"]) Settings.set(k, f.elements[k].value.trim());
+  for (const k of ["mode", "baseUrl", "model", "stepKey", "deepseekKey", "repo"]) Settings.set(k, f.elements[k].value.trim());
   refreshBanner(); renderPending();
 });
 $("#settings-test").onclick = async () => {
   const f = $("#settings-form"), msg = $("#settings-msg");
   msg.textContent = "测试中…";
+  if (f.elements.mode.value !== "personal") {
+    try {
+      const health = await serviceHealth();
+      msg.textContent = health.ready ? `问答服务 ✓ · ${health.search ? "联网查询 ✓" : "联网暂不可用"}` : "问答服务暂时不可用，请稍后再试";
+    } catch { msg.textContent = "暂时无法连接，请稍后再试"; }
+    return;
+  }
   const out = [];
   try {
     const r = await fetch(f.elements.baseUrl.value.trim().replace(/\/+$/, "") + "/chat/completions", {
@@ -273,7 +286,7 @@ function setBusy(b) {
 async function send(text) {
   text = text.trim();
   if (!text || controller) return;
-  if (!Settings.get("stepKey")) { openSettings(); return; }
+  if (!sharedMode() && !Settings.get("stepKey")) { openSettings(); return; }
   const u = addMsg("user", "");
   u.textContent = text;
   $("#input").value = "";

@@ -40,7 +40,7 @@
       </div>
     </div>
     <form class="composer" id="composer">
-      <textarea id="input" rows="3" placeholder="例如：我做联邦学习里的隐私保护，学生一作，想投三个月内截稿、最好能远程参会的 B 类以上会议" required></textarea>
+      <textarea id="input" rows="3" maxlength="4000" placeholder="例如：我做联邦学习里的隐私保护，学生一作，想投三个月内截稿、最好能远程参会的 B 类以上会议" required></textarea>
       <div class="composer-row">
         <label class="effort">推理
           <select id="effort">
@@ -109,7 +109,15 @@
 <dialog id="dlg-settings">
   <form method="dialog" id="settings-form">
     <h2>设置</h2>
-    <p class="muted">Key 只保存在本浏览器的 localStorage，只会发给对应的 API，不会进入代码仓库。</p>
+    <label>问答方式
+      <select name="mode">
+        <option value="shared">使用网站服务（无需 API Key）</option>
+        <option value="personal">使用自己的 API Key</option>
+      </select>
+    </label>
+    <p class="muted">默认可直接提问，无需配置。问题及近期对话会发送给模型服务；请勿输入敏感信息。</p>
+    <div id="personal-settings" hidden>
+    <p class="muted">个人 Key 仅保存在当前浏览器，只发送给对应的 API。</p>
     <fieldset>
       <legend>推理模型（OpenAI 兼容 Chat Completions）</legend>
       <label>Base URL <input name="baseUrl" type="url" required></label>
@@ -120,6 +128,7 @@
       <legend>联网搜索（DeepSeek Search / Fetch）</legend>
       <label>DeepSeek API Key <input name="deepseekKey" type="password" autocomplete="off" placeholder="留空则不联网"></label>
     </fieldset>
+    </div>
     <fieldset>
       <legend>待审提交</legend>
       <label>GitHub 仓库 <input name="repo" placeholder="owner/repo，可留空"></label>
@@ -133,6 +142,6 @@
   </form>
 </dialog>
 
-<script type="module" src="js/app.js"></script>
+<script type="module" src="js/app.js?v=shared-20261025"></script>
 </body>
 </html>
