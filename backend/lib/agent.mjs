@@ -97,7 +97,7 @@ async function deepseek(path, body, signal, config) {
   const key = config.deepseekKey;
   if (!key) return { error: "未配置 DeepSeek API Key，无法联网。请基于知识库回答，并告诉用户可在「设置」里填写。" };
   if (path === "fetch") config.validateFetchUrl(body.url);
-  await config.beforeWeb();
+  await config.beforeWeb(path);
   const res = await fetch(`https://api.deepseek.com/v1/tools/${path}`, {
     method: "POST", signal,
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -156,6 +156,7 @@ async function streamChat(body, signal, onDelta, config) {
   const dec = new TextDecoder();
   let buf = "", content = "", reasoning = "", finish = null, usage = null;
   const calls = [];
+  try {
   for (;;) {
     const { value, done } = await reader.read();
     if (done) break;
@@ -185,8 +186,8 @@ async function streamChat(body, signal, onDelta, config) {
       if (ch.finish_reason) finish = ch.finish_reason;
     }
   }
+  } finally { await reader.cancel().catch(() => {}); await config.afterModel(reservation, usage); }
   if (!finish) throw new Error("模型响应中断，请重试");
-  await config.afterModel(reservation, usage);
   return { content, reasoning, tool_calls: calls.filter(Boolean), finish, usage };
 }
 

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync, readdirSync } from "node:fs";
 import { handle, readInput, acquire, limits, spend, clientIdentity, validateFetchUrl, agentConfig } from "../lib/service.mjs";
+import { handleAdmin, authorizeAdmin, usageReport, effectiveLimits, LIMIT_FIELDS } from "../lib/usage.mjs";
 
 function database() {
   const sqlite = new DatabaseSync(":memory:");
@@ -13,9 +14,9 @@ function database() {
     sqlite,
     prepare(sql) {
       let args = [];
-      return { bind(...values) { args = values; return this; }, async first() { return sqlite.prepare(sql).get(...args) || null; }, async run() { return sqlite.prepare(sql).run(...args); } };
+      return { bind(...values) { args = values; return this; }, first() { return sqlite.prepare(sql).get(...args) || null; }, run() { return sqlite.prepare(sql).run(...args); }, all() { return {results:sqlite.prepare(sql).all(...args)}; } };
     },
-    batch(statements) { return Promise.all(statements.map(s => s.run())); },
+    batch(statements) { sqlite.exec("BEGIN");try {const result=statements.map(s=>s.run());sqlite.exec("COMMIT");return Promise.resolve(result);}catch(e){sqlite.exec("ROLLBACK");throw e;} },
   };
 }
 const base = "https://service.test";
@@ -114,4 +115,100 @@ test("upstream failures are redacted and release concurrency", async () => {
     assert.match(text, /event: error/); assert.ok(!text.includes(env.STEP_API_KEY));
     assert.equal(env.DB.sqlite.prepare("SELECT COUNT(*) AS n FROM leases").get().n, 0);
   } finally { globalThis.fetch = originalFetch; }
+});
+
+const owner = {userId:"verified-owner-id",email:"owner@example.test"};
+function adminEnv() {return {...environment(),ADMIN_BOOTSTRAP_EMAIL:owner.email};}
+function adminRequest(path="usage",body,headers={}) {
+  return new Request(`${base}/api/admin/${path}`,{method:body?"POST":"GET",headers:{"oai-authenticated-user-id":owner.userId,"oai-authenticated-user-email":owner.email,Origin:base,"Content-Type":"application/json",...headers},...(body?{body:JSON.stringify(body)}:{})});
+}
+async function setLimits(env,updates,version=0) {
+  const config=(await effectiveLimits(env)).limits;
+  const values={...Object.fromEntries(Object.keys(LIMIT_FIELDS).map(k=>[k,config[k]])),...updates};
+  return handleAdmin(adminRequest("limits",{limits:values,version}),env);
+}
+test("admin identity is required and bootstrap binds the verified owner's stable ID",async()=>{
+  const env=adminEnv();
+  assert.equal((await handleAdmin(new Request(base+"/api/admin/usage"),env)).status,401);
+  await assert.rejects(authorizeAdmin({userId:"stranger",email:"stranger@example.test"},env),e=>e.status===403);
+  await authorizeAdmin(owner,env);
+  await assert.rejects(authorizeAdmin({...owner,userId:"other-id"},env),e=>e.status===403);
+  await authorizeAdmin({...owner,email:"new-owner-email@example.test"},env);
+  const result=await handleAdmin(adminRequest(),env);
+  assert.equal(result.status,200);assert.equal(result.headers.get("cache-control"),"no-store");
+  assert.equal(result.headers.get("access-control-allow-origin"),null);
+});
+test("limit updates are persistent, same-origin only, validated and versioned",async()=>{
+  const env=adminEnv();const config=Object.fromEntries(Object.keys(LIMIT_FIELDS).map(k=>[k,limits(env)[k]]));
+  for(const origin of ["https://evil.test","null",""]) assert.equal((await handleAdmin(adminRequest("limits",{limits:config,version:0},{Origin:origin}),env)).status,403);
+  for(const change of [{dailyQuestions:-1},{dailyQuestions:1.5},{dailyTokens:1000000001},{unknown:2}]) assert.equal((await setLimits(env,change)).status,400);
+  assert.equal((await setLimits(env,{dailyQuestions:0})).status,200);
+  assert.equal((await effectiveLimits(env)).limits.dailyQuestions,0);
+  assert.equal((await setLimits(env,{dailyQuestions:5},0)).status,409);
+  assert.equal((await setLimits(env,{dailyQuestions:5},1)).status,200);
+  assert.equal((await effectiveLimits(env)).version,2);
+});
+test("zero question limit blocks visitors before model calls and preserves counters",async()=>{
+  const env=adminEnv();await setLimits(env,{dailyQuestions:0});
+  const result=await handle(request(),env);assert.equal(result.status,429);
+  const day=Math.floor(Date.now()/86400000);
+  assert.equal(env.DB.sqlite.prepare("SELECT questions FROM daily_usage WHERE day=?").get(day).questions,0);
+  assert.equal(env.DB.sqlite.prepare("SELECT COUNT(*) AS n FROM leases").get().n,0);
+  assert.equal(env.DB.sqlite.prepare("SELECT COUNT(*) AS n FROM model_usage").get().n,0);
+});
+test("concurrency rejection and daily quota rejection do not consume question totals",async()=>{
+  const db=database(),config=limits({MAX_CONCURRENT:1,DAILY_QUESTIONS:1});
+  const lease=await acquire(db,"a",config);
+  await assert.rejects(acquire(db,"b",config),e=>e.status===429);
+  await db.prepare("DELETE FROM leases WHERE id=?").bind(lease.id).run();
+  await assert.rejects(acquire(db,"b",config),e=>e.status===429);
+  assert.equal(db.sqlite.prepare("SELECT questions FROM daily_usage WHERE day=?").get(lease.day).questions,1);
+  assert.equal(db.sqlite.prepare("SELECT used FROM counters WHERE key=?").get(`questions:${lease.day}`).used,1);
+  assert.equal(db.sqlite.prepare("SELECT used FROM counters WHERE key=?").get(`client:b:${lease.day}`).used,0);
+});
+test("search and fetch are counted separately and live limits apply to an existing conversation",async()=>{
+  const env=adminEnv(),lease=await acquire(env.DB,"a",limits(env)),api=agentConfig(env,limits(env),lease,"low");
+  await setLimits(env,{dailySearch:1,dailyFetch:2,dailyWeb:2});
+  await api.beforeWeb("search");
+  await assert.rejects(api.beforeWeb("search"),e=>e.status===429);
+  await api.beforeWeb("fetch");
+  await assert.rejects(api.beforeWeb("fetch"),e=>e.status===429);
+  const row=(await usageReport(env)).days.find(d=>d.day===lease.day);
+  assert.equal(row.search_calls,1);assert.equal(row.fetch_calls,1);
+  assert.equal((await usageReport(env)).used.web,2);
+  await setLimits(env,{dailyTokens:0},1);
+  await assert.rejects(api.beforeModel({messages:[]}),e=>e.status===429);
+  assert.equal((await usageReport(env)).days[0].model_calls,0);
+});
+test("verified token usage settles once, while missing usage stays visibly unreported",async()=>{
+  const env=environment(),lease=await acquire(env.DB,"a",limits(env)),api=agentConfig(env,limits(env),lease,"low");
+  const a=await api.beforeModel({messages:[]}),b=await api.beforeModel({messages:[]});
+  await api.afterModel(a,{prompt_tokens:100,completion_tokens:25});
+  await api.afterModel(a,{prompt_tokens:100,completion_tokens:25});
+  await api.afterModel(b,null);
+  const report=await usageReport(env),day=report.days[0];
+  assert.equal(day.prompt_tokens,100);assert.equal(day.completion_tokens,25);assert.equal(day.total_tokens,125);
+  assert.equal(day.unreported_calls,1);assert.equal(day.unreported_tokens,b.reserved);
+  assert.equal(report.used.tokens,b.reserved+125);
+  await api.afterModel(b,{prompt_tokens:b.reserved+10,completion_tokens:20});
+  assert.equal((await usageReport(env)).used.tokens,b.reserved+155);
+});
+test("legacy counters remain separate from exact metrics and daily records survive quota expiry",async()=>{
+  const env=environment(),now=Date.now(),day=Math.floor(now/86400000);
+  for(const [key,used] of [[`questions:${day}`,7],[`web:${day}`,9],[`tokens:${day}`,50000]]) await spend(env.DB,key,used,100000,now+1000,"cap");
+  let report=await usageReport(env,7,now),row=report.days[0];
+  assert.equal(row.legacy_questions,7);assert.equal(row.legacy_web,9);assert.equal(row.legacy_tokens,50000);
+  assert.equal(row.questions,0);assert.equal(row.total_tokens,0);assert.equal(report.used.tokens,50000);
+  await acquire(env.DB,"a",limits(env),now+3*86400000);
+  report=await usageReport(env,7,now+3*86400000);
+  assert.equal(report.days.find(d=>d.day===day).legacy_questions,7);
+  assert.equal(report.days.find(d=>d.day===day+3).questions,1);
+});
+test("usage received before a stream disconnect is retained without claiming a completed answer",async()=>{
+  const env=environment(),originalFetch=globalThis.fetch;
+  globalThis.fetch=async()=>new Response(new ReadableStream({start(c){c.enqueue(new TextEncoder().encode('data: {"usage":{"prompt_tokens":30,"completion_tokens":4}}\n\n'));},pull(c){c.error(new Error("disconnect"));}}));
+  try {
+    const res=await handle(request(),env),body=await res.text();assert.match(body,/event: error/);
+    const day=(await usageReport(env)).days[0];assert.equal(day.total_tokens,34);assert.equal(day.failed,1);assert.equal(day.completed,0);
+  } finally {globalThis.fetch=originalFetch;}
 });

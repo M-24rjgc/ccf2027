@@ -1,6 +1,8 @@
 import { ask } from "./agent.mjs";
 import { initializeWiki } from "./data.mjs";
 import wiki from "./wiki.json" with { type: "json" };
+import { ServiceError, limits, effectiveLimits, ensureDay, preserveLegacy } from "./usage.mjs";
+export { ServiceError, limits } from "./usage.mjs";
 
 initializeWiki(wiki);
 const encoder = new TextEncoder();
@@ -8,27 +10,6 @@ const officialHosts = new Set(wiki.confs.flatMap(c => {
   try { return [new URL(c.link).hostname.toLowerCase()]; } catch { return []; }
 }));
 for (const host of ["aclrollingreview.org", "openreview.net", "ccf.org.cn"]) officialHosts.add(host);
-
-export class ServiceError extends Error {
-  constructor(message, status = 400) { super(message); this.status = status; }
-}
-
-export function limits(env) {
-  const positive = (key, fallback) => {
-    const n = Number(env[key]);
-    return Number.isSafeInteger(n) && n > 0 ? n : fallback;
-  };
-  return {
-    dailyQuestions: positive("DAILY_QUESTIONS", 50),
-    perClientDaily: positive("CLIENT_DAILY_QUESTIONS", 10),
-    perMinute: positive("CLIENT_MINUTE_QUESTIONS", 2),
-    concurrency: positive("MAX_CONCURRENT", 3),
-    dailyModels: positive("DAILY_MODEL_CALLS", 200),
-    dailyWeb: positive("DAILY_WEB_CALLS", 100),
-    dailyTokens: positive("DAILY_TOKEN_BUDGET", 2000000),
-    maxOutputTokens: Math.min(positive("MAX_OUTPUT_TOKENS", 16384), 32768),
-  };
-}
 
 export function corsHeaders(request, env) {
   const origin = request.headers.get("origin");
@@ -97,20 +78,34 @@ export async function spend(db, key, amount, cap, expires, message) {
 
 export async function acquire(db, client, config, now = Date.now()) {
   const day = Math.floor(now / 86400000), expiry = (day + 2) * 86400000;
+  await preserveLegacy(db, now);
   await db.batch([
     db.prepare("DELETE FROM counters WHERE expires_at < ?").bind(now),
     db.prepare("DELETE FROM leases WHERE expires_at < ?").bind(now),
   ]);
   await spend(db, `minute:${client}:${Math.floor(now / 60000)}`, 1, config.perMinute, now + 120000, "提问太快，请一分钟后再试");
-  await spend(db, `client:${client}:${day}`, 1, config.perClientDaily, expiry, "今天的提问次数已用完，请明天再来");
-  await spend(db, `questions:${day}`, 1, config.dailyQuestions, expiry, "今天的共享问答额度已用完，请明天再来");
   const id = crypto.randomUUID();
   const lease = await db.prepare(`INSERT INTO leases (id, client, expires_at)
     SELECT ?, ?, ? WHERE (SELECT COUNT(*) FROM leases WHERE expires_at > ?) < ?
     AND NOT EXISTS (SELECT 1 FROM leases WHERE client = ? AND expires_at > ?) RETURNING id`)
     .bind(id, client, now + 240000, now, config.concurrency, client, now).first();
   if (!lease) throw new ServiceError("当前查询较多，请等正在进行的回答结束后再试", 429);
+  const spent=[];
+  try {
+    for (const [key, cap, message] of [[`client:${client}:${day}`,config.perClientDaily,"今天的提问次数已用完，请明天再来"], [`questions:${day}`,config.dailyQuestions,"今天的共享问答额度已用完，请明天再来"]]) {
+      await spend(db,key,1,cap,expiry,message); spent.push([key,1]);
+    }
+    await db.prepare("UPDATE daily_usage SET questions = questions + 1 WHERE day = ?").bind(day).run();
+  } catch (e) {
+    await refund(db,spent);
+    await db.prepare("DELETE FROM leases WHERE id = ?").bind(id).run();
+    throw e;
+  }
   return { id, day, expiry };
+}
+
+async function refund(db, spent) {
+  if (spent.length) await db.batch(spent.map(([key, amount]) => db.prepare("UPDATE counters SET used = MAX(0, used - ?) WHERE key = ?").bind(amount, key)));
 }
 
 export function agentConfig(env, config, lease, effort) {
@@ -120,20 +115,42 @@ export function agentConfig(env, config, lease, effort) {
     model: "step-5-preview",
     stepKey: env.STEP_API_KEY, deepseekKey: env.DEEPSEEK_API_KEY,
     effort, maxOutputTokens: config.maxOutputTokens, validateFetchUrl,
-    beforeWeb: () => spend(db, `web:${lease.day}`, 1, config.dailyWeb, lease.expiry, "今天的联网查询额度已用完"),
+    async beforeWeb(kind) {
+      if (!["search","fetch"].includes(kind)) throw new ServiceError("联网请求类型无效");
+      const current = (await effectiveLimits(env)).limits;
+      await ensureDay(db,lease.day);
+      const spent=[];
+      try {
+        for (const [key, cap] of [[`web:${lease.day}`,current.dailyWeb],[`${kind}:${lease.day}`,kind === "search"?current.dailySearch:current.dailyFetch]]) {
+          await spend(db,key,1,cap,lease.expiry,"今天的联网查询额度已用完"); spent.push([key,1]);
+        }
+        await db.prepare(`UPDATE daily_usage SET ${kind}_calls = ${kind}_calls + 1 WHERE day = ?`).bind(lease.day).run();
+      } catch(e) { await refund(db,spent); throw e; }
+    },
     async beforeModel(body) {
-      await spend(db, `models:${lease.day}`, 1, config.dailyModels, lease.expiry, "今天的共享问答额度已用完");
+      const current = (await effectiveLimits(env)).limits;
+      await ensureDay(db,lease.day);
       // UTF-8 byte length is a conservative upper bound for byte-tokenized input.
       const reserved = encoder.encode(JSON.stringify(body)).byteLength + config.maxOutputTokens + 4096;
       const key = `tokens:${lease.day}`;
-      await spend(db, key, reserved, config.dailyTokens, lease.expiry, "今天的共享问答额度已用完");
-      return { key, reserved };
+      const spent=[], id=crypto.randomUUID();
+      try {
+        await spend(db, key, reserved, current.dailyTokens, lease.expiry, "今天的 token 额度不足，请明天再来"); spent.push([key,reserved]);
+        await spend(db, `models:${lease.day}`, 1, current.dailyModels, lease.expiry, "今天的模型调用额度已用完"); spent.push([`models:${lease.day}`,1]);
+        await db.prepare("INSERT INTO model_usage (id, day, reserved, created_at) VALUES (?, ?, ?, ?)").bind(id,lease.day,reserved,Date.now()).run();
+      } catch(e) { await refund(db,spent); throw e; }
+      return { id, key, reserved };
     },
     async afterModel(reservation, usage) {
-      const used = (usage?.prompt_tokens ?? NaN) + (usage?.completion_tokens ?? NaN);
-      if (!Number.isSafeInteger(used) || used <= 0) return;
-      const refund = Math.max(0, reservation.reserved - used);
-      if (refund) await db.prepare("UPDATE counters SET used = MAX(0, used - ?) WHERE key = ?").bind(refund, reservation.key).run();
+      const prompt=usage?.prompt_tokens, completion=usage?.completion_tokens;
+      if (![prompt,completion].every(n=>Number.isSafeInteger(n)&&n>=0) || prompt+completion<=0) return;
+      await db.batch([
+        db.prepare(`UPDATE counters SET used = MAX(0, used + ? - ?) WHERE key = ?
+          AND EXISTS (SELECT 1 FROM model_usage WHERE id = ? AND prompt_tokens IS NULL)`)
+          .bind(prompt+completion,reservation.reserved,reservation.key,reservation.id),
+        db.prepare("UPDATE model_usage SET prompt_tokens = ?, completion_tokens = ? WHERE id = ? AND prompt_tokens IS NULL")
+          .bind(prompt,completion,reservation.id),
+      ]);
     },
   };
 }
@@ -151,7 +168,7 @@ export async function handle(request, env) {
   try {
     if (!ready) throw new ServiceError("问答服务暂时不可用，请稍后再试", 503);
     input = await readInput(request);
-    config = limits(env);
+    config = (await effectiveLimits(env)).limits;
     lease = await acquire(env.DB, await clientIdentity(request, env), config);
   } catch (e) {
     return Response.json({ error: e instanceof ServiceError ? e.message : "问答服务暂时不可用，请稍后再试" }, { status: e.status || 503, headers: { ...headers, ...(e.status === 429 ? { "Retry-After": "60" } : {}) } });
@@ -165,6 +182,7 @@ export async function handle(request, env) {
     async start(controller) {
       const send = (event, data) => { if (!closed) controller.enqueue(encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)); };
       const heartbeat = setInterval(() => { if (!closed) controller.enqueue(encoder.encode(": keepalive\n\n")); }, 15000);
+      let completed=false;
       try {
         const result = await ask(input.history, input.text, {
           signal: abort.signal,
@@ -175,13 +193,19 @@ export async function handle(request, env) {
           onPending: item => send("pending", item),
         }, agentConfig(env, config, lease, input.effort));
         send("done", { ...result, visited: [...result.visited] });
+        completed=true;
       } catch (e) {
         send("error", { message: abort.signal.aborted ? "查询已停止或超时，请重试" : e.status === 429 ? e.message : "本次回答未完成，请稍后重试" });
       } finally {
         clearInterval(heartbeat); clearTimeout(timer);
         request.signal.removeEventListener("abort", onAbort);
-        await env.DB.prepare("DELETE FROM leases WHERE id = ?").bind(lease.id).run();
-        if (!closed) { closed = true; controller.close(); }
+        try {
+          const field=completed?"completed":"failed";
+          await env.DB.batch([
+            env.DB.prepare(`UPDATE daily_usage SET ${field} = ${field} + 1 WHERE day = ?`).bind(lease.day),
+            env.DB.prepare("DELETE FROM leases WHERE id = ?").bind(lease.id),
+          ]);
+        } finally { if (!closed) { closed = true; controller.close(); } }
       }
     },
     cancel() { closed = true; abort.abort(); },
