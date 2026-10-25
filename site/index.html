@@ -6,22 +6,24 @@
 <title>CCF 会议助手</title>
 <meta name="description" content="基于 LLM Wiki 的 CCF 2027 会议问答与选会助手：知识库 + 关系图 + 联网核查">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3552'/%3E%3Ccircle cx='10' cy='11' r='3.2' fill='%23fff'/%3E%3Ccircle cx='22' cy='9' r='2.4' fill='%23F2B84B'/%3E%3Ccircle cx='19' cy='22' r='3.6' fill='%23fff'/%3E%3Cpath d='M10 11L19 22M22 9L19 22M10 11L22 9' stroke='%23fff' stroke-width='1.4' opacity='.7'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=ux-20261025">
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
 </head>
 <body>
 <header class="top">
-  <div class="brand">
+  <a class="brand" href="index.html#chat" aria-label="CCF 会议助手首页">
     <span class="logo" aria-hidden="true"></span>
     <div>
       <h1>CCF 会议助手</h1>
       <p class="sub" id="sub">加载知识库…</p>
     </div>
-  </div>
-  <nav class="topnav">
-    <a href="dashboard.html" target="_blank" rel="noopener">倒计时看板</a>
+  </a>
+  <nav class="topnav" aria-label="主导航">
+    <button type="button" class="nav-active" id="nav-chat">问答</button>
+    <button type="button" id="nav-library">查会议</button>
+    <a href="dashboard.html">倒计时看板</a>
     <button type="button" class="ghost" id="btn-settings">设置</button>
   </nav>
 </header>
@@ -32,26 +34,27 @@
 
 <main class="layout">
   <section class="chat" aria-label="对话">
+    <div class="chat-head"><span id="service-status" role="status">正在连接网站服务…</span><button type="button" class="ghost sm" id="btn-clear" title="开始新的对话">新对话</button></div>
     <div class="msgs" id="msgs">
       <div class="welcome" id="welcome">
         <h2>问会议，或者让它帮你选会</h2>
-        <p>回答基于整理好的会议知识库（每个字段都标了出处），知识库缺信息时再联网查官网。直接用大白话说，也可以整段贴论文摘要。</p>
+        <p>查截稿、比规则、找适合你的会议。直接描述研究方向和投稿条件，也可以粘贴论文摘要。</p>
+        <p class="welcome-note">无需填写 Key。先查知识库，缺少信息时自动联网核查官网。</p>
         <div class="examples" id="examples"></div>
       </div>
     </div>
     <form class="composer" id="composer">
-      <textarea id="input" rows="3" maxlength="4000" placeholder="例如：我做联邦学习里的隐私保护，学生一作，想投三个月内截稿、最好能远程参会的 B 类以上会议" required></textarea>
+      <textarea id="input" aria-label="你的问题" rows="3" maxlength="4000" placeholder="输入会议名、投稿问题，或描述你的研究方向…" required></textarea>
       <div class="composer-row">
-        <label class="effort">推理
+        <label class="effort">回答方式
           <select id="effort">
             <option value="auto">自动</option>
-            <option value="low">low</option>
-            <option value="medium">medium</option>
-            <option value="high">high</option>
+            <option value="low">快速</option>
+            <option value="medium">标准</option>
+            <option value="high">深入</option>
           </select>
         </label>
         <span class="hint" id="hint">Enter 发送 · Shift+Enter 换行</span>
-        <button type="button" class="ghost" id="btn-clear" title="清空对话">清空</button>
         <button type="submit" class="primary" id="btn-send">发送</button>
       </div>
     </form>
@@ -59,20 +62,22 @@
 
   <section class="side" aria-label="知识库">
     <nav class="tabs" role="tablist">
-      <button type="button" role="tab" data-tab="graph" class="on">关系图</button>
-      <button type="button" role="tab" data-tab="page">页面</button>
-      <button type="button" role="tab" data-tab="pending">待审 <span class="badge" id="pending-count">0</span></button>
+      <button type="button" role="tab" id="tab-page" data-tab="page" aria-controls="pane-page" aria-selected="true" class="on">会议资料</button>
+      <button type="button" role="tab" id="tab-graph" data-tab="graph" aria-controls="pane-graph" aria-selected="false" tabindex="-1">关系图</button>
+      <button type="button" role="tab" id="tab-pending" data-tab="pending" aria-controls="pane-pending" aria-selected="false" tabindex="-1">信息更新 <span class="badge" id="pending-count">0</span></button>
     </nav>
 
-    <div class="pane" id="pane-graph">
+    <div class="pane" id="pane-graph" role="tabpanel" aria-labelledby="tab-graph" hidden>
       <div class="gbar">
-        <input id="gsearch" type="search" placeholder="定位会议 / 方向 / 概念">
+        <input id="gsearch" type="search" aria-label="定位关系图节点" placeholder="会议 / 方向 / 概念">
+        <button type="button" class="ghost sm" id="g-search">查找</button>
         <label><input type="checkbox" id="t-concept" checked> 概念</label>
         <label><input type="checkbox" id="t-colo" checked> 同期同地</label>
         <label title="AoE 时区、CCF 评级、现场报告：连接很多会议"><input type="checkbox" id="t-dense"> 密集概念</label>
         <button type="button" class="ghost sm" id="g-fit">全图</button>
         <button type="button" class="ghost sm" id="g-clear">清除高亮</button>
       </div>
+      <div id="g-feedback" class="hint" role="status"></div>
       <div class="legend">
         <span><i class="dot a"></i>CCF-A</span><span><i class="dot b"></i>B</span><span><i class="dot c"></i>C</span><span><i class="dot n"></i>非 CCF</span>
         <span><i class="sq"></i>方向</span><span><i class="dia"></i>概念</span><span><i class="ln"></i>同期同地</span>
@@ -82,19 +87,20 @@
       <div class="ncard" id="ncard" hidden></div>
     </div>
 
-    <div class="pane" id="pane-page" hidden>
+    <div class="pane" id="pane-page" role="tabpanel" aria-labelledby="tab-page">
       <div class="pbar">
         <button type="button" class="ghost sm" id="p-back" disabled>← 返回</button>
-        <button type="button" class="ghost sm" id="p-index">索引</button>
+        <button type="button" class="ghost sm" id="p-index">全部会议</button>
+        <input id="p-search" type="search" aria-label="搜索会议资料" placeholder="搜索会议名、方向或关键词">
         <button type="button" class="ghost sm" id="p-locate">在图中定位</button>
-        <button type="button" class="ghost sm" id="p-ask">问 AI</button>
+        <button type="button" class="ghost sm" id="p-ask">问这个会议</button>
       </div>
       <article class="page md" id="page"></article>
     </div>
 
-    <div class="pane" id="pane-pending" hidden>
+    <div class="pane" id="pane-pending" role="tabpanel" aria-labelledby="tab-pending" hidden>
       <div class="pend-head">
-        <p>AI 联网查到可补缺或纠正知识库的<b>官方</b>信息时，会提交到这里。只存在你的浏览器里，审核后导出，由维护者运行 <code>apply_pending.py</code> 入库。</p>
+        <p>联网查询发现的官方新信息会收集在这里，仅保存在当前浏览器。核对出处并采纳后，可提交给维护者审核；采纳不会直接改动公开知识库。</p>
         <div class="pend-actions">
           <button type="button" class="ghost sm" id="pend-export">导出已采纳 JSON</button>
           <button type="button" class="ghost sm" id="pend-copy">复制已采纳</button>
@@ -115,7 +121,7 @@
         <option value="personal">使用自己的 API Key</option>
       </select>
     </label>
-    <p class="muted">默认可直接提问，无需配置。问题及近期对话会发送给模型服务；请勿输入敏感信息。</p>
+    <p class="muted" id="mode-description">网站提供问答和联网核查服务，无需自行填写 Key。问题及近期对话会发送给模型服务。</p>
     <div id="personal-settings" hidden>
     <p class="muted">个人 Key 仅保存在当前浏览器，只发送给对应的 API。</p>
     <fieldset>
@@ -129,10 +135,10 @@
       <label>DeepSeek API Key <input name="deepseekKey" type="password" autocomplete="off" placeholder="留空则不联网"></label>
     </fieldset>
     </div>
-    <fieldset>
-      <legend>待审提交</legend>
+    <details class="advanced"><summary>信息更新的提交设置</summary><fieldset>
+      <legend>提交位置</legend>
       <label>GitHub 仓库 <input name="repo" placeholder="owner/repo，可留空"></label>
-    </fieldset>
+    </fieldset></details>
     <div class="dlg-actions">
       <button type="button" class="ghost" id="settings-test">测试连接</button>
       <span class="hint" id="settings-msg"></span>
@@ -142,6 +148,6 @@
   </form>
 </dialog>
 
-<script type="module" src="js/app.js?v=shared-20261025"></script>
+<script type="module" src="js/app.js?v=ux-20261025"></script>
 </body>
 </html>
