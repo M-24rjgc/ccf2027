@@ -4,6 +4,8 @@ import { DatabaseSync } from "node:sqlite";
 import { readFileSync, readdirSync } from "node:fs";
 import { handle, readInput, acquire, limits, spend, clientIdentity, validateFetchUrl, agentConfig } from "../lib/service.mjs";
 import { handleAdmin, authorizeAdmin, usageReport, effectiveLimits, LIMIT_FIELDS } from "../lib/usage.mjs";
+import { publicSearchQuery, publicPageUrl } from "../lib/web-privacy.mjs";
+import { protectResponse, rejectUnsafeRequest } from "../lib/security.mjs";
 
 function database() {
   const sqlite = new DatabaseSync(":memory:");
@@ -167,7 +169,7 @@ test("concurrency rejection and daily quota rejection do not consume question to
   assert.equal(db.sqlite.prepare("SELECT used FROM counters WHERE key=?").get(`client:b:${lease.day}`).used,0);
 });
 test("search and fetch are counted separately and live limits apply to an existing conversation",async()=>{
-  const env=adminEnv(),lease=await acquire(env.DB,"a",limits(env)),api=agentConfig(env,limits(env),lease,"low");
+  const env=adminEnv(),lease=await acquire(env.DB,"a",limits(env)),api=agentConfig(env,limits(env),lease,"low",true);
   await setLimits(env,{dailySearch:1,dailyFetch:2,dailyWeb:2});
   await api.beforeWeb("search");
   await assert.rejects(api.beforeWeb("search"),e=>e.status===429);
@@ -211,4 +213,31 @@ test("usage received before a stream disconnect is retained without claiming a c
     const res=await handle(request(),env),body=await res.text();assert.match(body,/event: error/);
     const day=(await usageReport(env)).days[0];assert.equal(day.total_tokens,34);assert.equal(day.failed,1);assert.equal(day.completed,0);
   } finally {globalThis.fetch=originalFetch;}
+});
+
+test('network access is off by default even if a model attempts to call a tool',async()=>{
+ const env=environment(), original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async(url,options)=>{
+  assert.equal(new URL(url).hostname,'api.stepfun.com');assert.equal(options.redirect,'error');
+  const body=JSON.parse(options.body);assert.ok(!body.tools?.some(t=>['web_search','web_fetch','propose_update'].includes(t.function.name)));
+  const delta=calls++===0?{tool_calls:[{index:0,id:'attempt',function:{name:'web_search',arguments:'{"query":"ICLR private question"}'}}]}:{content:'仅依据知识库回答'};
+  return new Response('data: '+JSON.stringify({choices:[{delta,finish_reason:calls===1?'tool_calls':'stop'}],usage:{prompt_tokens:20,completion_tokens:5}})+'\n\n');
+ };
+ try {const text=await(await handle(request({text:'privacy-sentinel-user-text'}),env)).text();assert.match(text,/event: done/);assert.equal((await usageReport(env)).used.web,0);
+  const contents=env.DB.sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map(({name})=>env.DB.sqlite.prepare(`SELECT * FROM ${name}`).all());
+  assert.ok(!JSON.stringify(contents).includes('privacy-sentinel-user-text'));
+ }finally{globalThis.fetch=original;}
+});
+test('search text is rebuilt from public conference vocabulary and never includes private strings',()=>{
+ const confs=[{abbr:'ICLR',link:'https://iclr.cc/'}];
+ assert.equal(publicSearchQuery('ICLR deadline alice@example.test unpublished-secret',confs),'ICLR 2027 deadline site:iclr.cc');
+ assert.throws(()=>publicSearchQuery('private content only',confs));
+ for(const url of ['https://evil.test/','http://iclr.cc/','https://iclr.cc/?secret=PRIVATE','https://iclr.cc/#PRIVATE'])assert.throws(()=>publicPageUrl(url,confs));
+});
+test('responses disable caches, framing and unused server action/image routes',()=>{
+ const req=new Request(base+'/admin');const r=protectResponse(new Response('test'),req);
+ for(const [key,value] of [['cache-control','no-store'],['referrer-policy','no-referrer'],['x-frame-options','DENY']])assert.equal(r.headers.get(key),value);
+ assert.match(r.headers.get('strict-transport-security'),/max-age/);
+ assert.equal(rejectUnsafeRequest(new Request(base+'/_next/image?url=https://evil.test')).status,404);
+ assert.equal(rejectUnsafeRequest(new Request(base+'/admin',{method:'POST',headers:{'next-action':'test'},body:'private'})).status,404);
 });

@@ -42,19 +42,20 @@ export async function readInput(request) {
   try { input = JSON.parse(new TextDecoder().decode(await new Blob(chunks).arrayBuffer())); }
   catch { throw new ServiceError("请求格式无效"); }
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new ServiceError("请求格式无效");
-  if (Object.keys(input).some(k => !["text", "history", "effort"].includes(k))) throw new ServiceError("请求包含不支持的字段");
+  if (Object.keys(input).some(k => !["text", "history", "effort", "allowWeb"].includes(k))) throw new ServiceError("请求包含不支持的字段");
+  if (input.allowWeb !== undefined && typeof input.allowWeb !== "boolean") throw new ServiceError("联网选项格式无效");
   if (typeof input.text !== "string" || !input.text.trim() || input.text.length > 4000) throw new ServiceError("问题需为 1–4000 个字符");
   const history = input.history ?? [];
   if (!Array.isArray(history) || history.length > 8 || history.some(m => !m || !["user", "assistant"].includes(m.role) || typeof m.content !== "string" || m.content.length > 8000)) throw new ServiceError("对话历史过长或格式无效，请清空后重试");
   if (history.reduce((n, m) => n + m.content.length, input.text.length) > 20000) throw new ServiceError("对话历史过长，请清空后重试");
   if (!["auto", "low", "medium", "high"].includes(input.effort ?? "auto")) throw new ServiceError("推理等级无效");
-  return { text: input.text.trim(), history: history.map(m => ({ role: m.role, content: m.content })), effort: input.effort || "auto" };
+  return { text: input.text.trim(), history: history.map(m => ({ role: m.role, content: m.content })), effort: input.effort || "auto", allowWeb: input.allowWeb === true };
 }
 
 export function validateFetchUrl(value) {
   let url;
   try { url = new URL(value); } catch { throw new ServiceError("网页地址无效"); }
-  if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || (url.port && !['80', '443'].includes(url.port))) throw new ServiceError("仅支持会议官网页面");
+  if (url.protocol !== 'https:' || url.username || url.password || url.port || url.search || url.hash) throw new ServiceError("仅支持不含查询参数的 HTTPS 会议官网页面");
   if (![...officialHosts].some(h => url.hostname === h || url.hostname.endsWith('.' + h))) throw new ServiceError("该域名不在会议官网列表中");
 }
 
@@ -64,7 +65,7 @@ export async function clientIdentity(request, env) {
   const ip = request.headers.get("cf-connecting-ip");
   const identity = ip || "anonymous-shared-pool";
   const key = await crypto.subtle.importKey("raw", encoder.encode(env.CLIENT_HASH_SECRET), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-  const digest = await crypto.subtle.sign("HMAC", key, encoder.encode(identity));
+  const digest = await crypto.subtle.sign("HMAC", key, encoder.encode(`${Math.floor(Date.now()/86400000)}:${identity}`));
   return [...new Uint8Array(digest)].map(v => v.toString(16).padStart(2, "0")).join("");
 }
 
@@ -108,14 +109,15 @@ async function refund(db, spent) {
   if (spent.length) await db.batch(spent.map(([key, amount]) => db.prepare("UPDATE counters SET used = MAX(0, used - ?) WHERE key = ?").bind(amount, key)));
 }
 
-export function agentConfig(env, config, lease, effort) {
+export function agentConfig(env, config, lease, effort, allowWeb = false) {
   const db = env.DB;
   return {
     baseUrl: "https://api.stepfun.com/step_plan/v1",
     model: "step-5-preview",
     stepKey: env.STEP_API_KEY, deepseekKey: env.DEEPSEEK_API_KEY,
-    effort, maxOutputTokens: config.maxOutputTokens, validateFetchUrl,
+    effort, allowWeb, maxOutputTokens: config.maxOutputTokens, validateFetchUrl,
     async beforeWeb(kind) {
+      if (!allowWeb) throw new ServiceError("本次未开启联网核查");
       if (!["search","fetch"].includes(kind)) throw new ServiceError("联网请求类型无效");
       const current = (await effectiveLimits(env)).limits;
       await ensureDay(db,lease.day);
@@ -191,7 +193,7 @@ export async function handle(request, env) {
           onToolStart: (name, args) => send("tool_start", { name, args }),
           onToolEnd: (name, args, result) => send("tool_end", { name, args, result }),
           onPending: item => send("pending", item),
-        }, agentConfig(env, config, lease, input.effort));
+        }, agentConfig(env, config, lease, input.effort, input.allowWeb));
         send("done", { ...result, visited: [...result.visited] });
         completed=true;
       } catch (e) {

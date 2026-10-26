@@ -2,14 +2,16 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://ccf2027-api-m24rjgc.decent-hill-0315.chatgpt.site https://api.stepfun.com https://api.deepseek.com; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CCF 会议助手</title>
 <meta name="description" content="基于 LLM Wiki 的 CCF 2027 会议问答与选会助手：知识库 + 关系图 + 联网核查">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3552'/%3E%3Ccircle cx='10' cy='11' r='3.2' fill='%23fff'/%3E%3Ccircle cx='22' cy='9' r='2.4' fill='%23F2B84B'/%3E%3Ccircle cx='19' cy='22' r='3.6' fill='%23fff'/%3E%3Cpath d='M10 11L19 22M22 9L19 22M10 11L22 9' stroke='%23fff' stroke-width='1.4' opacity='.7'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=ux-20261025">
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<link rel="stylesheet" href="style.css?v=privacy-20261025">
+<script src="vendor/marked.min.js" integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi"></script>
+<script src="vendor/purify.min.js" integrity="sha384-P0JNneQf81HOl9VwNXK76cQ9VMD6Nfsnepxb0cCOg8+UzEdzgPHAPV4wVQrvYQSx"></script>
+<script src="vendor/cytoscape.min.js" integrity="sha384-IWROdLKRsN1UuJywMlWl7/blXQ8GEooN2n7dzTxfEPd7ybYIKCUJ2Ol/1Gpf3YV4"></script>
 </head>
 <body>
 <header class="top">
@@ -23,7 +25,7 @@
   <nav class="topnav" aria-label="主导航">
     <button type="button" class="nav-active" id="nav-chat">问答</button>
     <button type="button" id="nav-library">查会议</button>
-    <a href="dashboard.html">倒计时看板</a>
+    <a href="dashboard.html" target="_blank" rel="noopener noreferrer">倒计时看板</a>
     <button type="button" class="ghost" id="btn-settings">设置</button>
   </nav>
 </header>
@@ -39,12 +41,14 @@
       <div class="welcome" id="welcome">
         <h2>问会议，或者让它帮你选会</h2>
         <p>查截稿、比规则、找适合你的会议。直接描述研究方向和投稿条件，也可以粘贴论文摘要。</p>
-        <p class="welcome-note">无需填写 Key。先查知识库，缺少信息时自动联网核查官网。</p>
+        <p class="welcome-note">无需填写 Key。默认仅查知识库，可勾选联网核查。</p>
         <div class="examples" id="examples"></div>
       </div>
     </div>
     <form class="composer" id="composer">
-      <textarea id="input" aria-label="你的问题" rows="3" maxlength="4000" placeholder="输入会议名、投稿问题，或描述你的研究方向…" required></textarea>
+      <textarea autocomplete="off" spellcheck="false" id="input" aria-label="你的问题" rows="3" maxlength="4000" placeholder="输入会议名、投稿问题，或描述你的研究方向…" required></textarea>
+      <div class="privacy-note">问题和近期对话会发送给 Step。本站不保存问答正文；刷新或关闭页面会清除对话。模型服务与托管平台按各自政策处理数据。</div>
+      <label class="web-consent"><input type="checkbox" id="allow-web"> 联网核查：向 DeepSeek 发送搜索词和网址</label>
       <div class="composer-row">
         <label class="effort">回答方式
           <select id="effort">
@@ -100,11 +104,11 @@
 
     <div class="pane" id="pane-pending" role="tabpanel" aria-labelledby="tab-pending" hidden>
       <div class="pend-head">
-        <p>联网查询发现的官方新信息会收集在这里，仅保存在当前浏览器。核对出处并采纳后，可提交给维护者审核；采纳不会直接改动公开知识库。</p>
+        <p>联网查询发现的官方新信息会收集在这里，仅在当前页面内存中保留。核对出处并采纳后，可提交给维护者审核；采纳不会直接改动公开知识库。</p>
         <div class="pend-actions">
           <button type="button" class="ghost sm" id="pend-export">导出已采纳 JSON</button>
           <button type="button" class="ghost sm" id="pend-copy">复制已采纳</button>
-          <a class="btn ghost sm" id="pend-issue" target="_blank" rel="noopener" hidden>提交 GitHub Issue</a>
+          <a class="btn ghost sm" id="pend-issue" target="_blank" rel="noopener" hidden>打开 GitHub Issue（自行粘贴）</a>
         </div>
       </div>
       <div id="pend-list"></div>
@@ -121,12 +125,12 @@
         <option value="personal">使用自己的 API Key</option>
       </select>
     </label>
-    <p class="muted" id="mode-description">网站提供问答和联网核查服务，无需自行填写 Key。问题及近期对话会发送给模型服务。</p>
+    <p class="muted" id="mode-description">网站提供问答服务，无需填写 Key。问题及近期对话会发送给 Step；勾选联网核查后才会使用 DeepSeek。</p>
     <p class="muted"><a href="https://ccf2027-api-m24rjgc.decent-hill-0315.chatgpt.site/admin" target="_blank" rel="noopener">用量管理</a> · 仅网站管理员可查看和设置额度</p>
     <div id="personal-settings" hidden>
-    <p class="muted">个人 Key 仅保存在当前浏览器，只发送给对应的 API。</p>
+    <p class="muted">个人 Key 仅在当前页面内存中保留，刷新或关闭后清除，只发送给 Step / DeepSeek 官方 HTTPS 接口。</p>
     <fieldset>
-      <legend>推理模型（OpenAI 兼容 Chat Completions）</legend>
+      <legend>推理模型（Step 官方接口）</legend>
       <label>Base URL <input name="baseUrl" type="url" required></label>
       <label>模型 <input name="model" required></label>
       <label>API Key <input name="stepKey" type="password" autocomplete="off"></label>
@@ -149,6 +153,6 @@
   </form>
 </dialog>
 
-<script type="module" src="js/app.js?v=ux-20261025"></script>
+<script type="module" src="js/app.js?v=privacy-20261025"></script>
 </body>
 </html>

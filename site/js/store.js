@@ -1,9 +1,16 @@
-// 本地存储：设置（API Key 只存在本浏览器）与待审修改队列。存储不可用时退化为内存。
+// Settings and proposed updates are kept only in this document's memory.
+// Remove data retained by earlier releases without reading its contents.
+for (const storageName of ["localStorage", "sessionStorage"]) {
+  try {
+    const storage = globalThis[storageName];
+    for (const key of Object.keys(storage)) if (key.startsWith("ccf.")) storage.removeItem(key);
+  } catch {}
+}
 
 const mem = {};
 const ls = {
-  get(k) { try { const v = localStorage.getItem(k); return v === null ? mem[k] ?? null : v; } catch { return mem[k] ?? null; } },
-  set(k, v) { mem[k] = v; try { localStorage.setItem(k, v); } catch { /* 隐私模式等 */ } },
+  get(k) { return mem[k] ?? null; },
+  set(k, v) { mem[k] = v; },
 };
 
 const DEFAULTS = {
@@ -13,6 +20,7 @@ const DEFAULTS = {
   stepKey: "",
   deepseekKey: "",
   effort: "auto",
+  allowWeb: "false",
   repo: "M-24rjgc/ccf2027",
 };
 
@@ -20,6 +28,7 @@ export const Settings = {
   get(k) { const v = ls.get("ccf.set." + k); return v === null ? DEFAULTS[k] : v; },
   set(k, v) { ls.set("ccf.set." + k, v ?? ""); },
   all() { return Object.fromEntries(Object.keys(DEFAULTS).map(k => [k, this.get(k)])); },
+  clear() { for (const key of Object.keys(mem)) delete mem[key]; },
 };
 
 const PKEY = "ccf.pending";
@@ -35,4 +44,5 @@ export const Pending = {
   },
   update(id, patch) { this.save(this.list().map(x => (x.id === id ? { ...x, ...patch } : x))); },
   remove(id) { this.save(this.list().filter(x => x.id !== id)); },
+  clear() { this.save([]); },
 };

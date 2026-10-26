@@ -1,4 +1,4 @@
-import { Settings, Pending } from "./store.js?v=shared-20261025";
+import { Settings, Pending } from "./store.js?v=privacy-20261025";
 
 export const SERVICE_URL = "https://ccf2027-api-m24rjgc.decent-hill-0315.chatgpt.site";
 export const sharedMode = () => Settings.get("mode") !== "personal";
@@ -11,9 +11,9 @@ export async function serviceHealth() {
 
 export async function askShared(history, text, ui) {
   const res = await fetch(`${SERVICE_URL}/api/ask`, {
-    method: "POST", credentials: "omit", signal: ui.signal,
+    method: "POST", credentials: "omit", cache: "no-store", redirect: "error", referrerPolicy: "no-referrer", signal: ui.signal,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, history: history.slice(-8), effort: Settings.get("effort") || "auto" }),
+    body: JSON.stringify({ text, history: history.slice(-8), effort: Settings.get("effort") || "auto", allowWeb: Settings.get("allowWeb") === "true" }),
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));

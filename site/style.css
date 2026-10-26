@@ -265,3 +265,5 @@ dialog { max-height:calc(100dvh - 32px); overflow:auto; }
   .dlg-actions .hint { flex-basis:100%; order:3; }
 }
 @media (prefers-reduced-motion:reduce) { .cursor::after { animation:none; } }
+
+.privacy-note{font-size:11px;line-height:1.5;color:var(--muted);margin:2px 0 8px}.web-consent{display:flex;align-items:center;gap:6px;font-size:12px;margin-bottom:8px}.web-consent input{width:auto}

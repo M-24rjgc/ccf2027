@@ -1,9 +1,10 @@
 import { DB, loadWiki, liveState, resolveId, nowBJText } from "./data.js";
-import { ask, routeEffort } from "./agent.js?v=shared-20261025";
-import { Settings, Pending } from "./store.js?v=shared-20261025";
-import { sharedMode, serviceHealth } from "./service.js?v=shared-20261025";
+import { ask, routeEffort } from "./agent.js?v=privacy-20261025";
+import { Settings, Pending } from "./store.js?v=privacy-20261025";
+import { sharedMode, serviceHealth } from "./service.js?v=privacy-20261025";
 import { initGraph, applyToggles, focus, highlightPath, clearHighlight, findNode, fitAll, resize } from "./graph.js";
-import { readSession, writeSession } from "./session.js?v=ux-20261025";
+import { readSession, writeSession, clearSession } from "./session.js?v=privacy-20261025";
+import { configureMarkdown, safeExternalUrl, modelBaseUrl } from "./security.js?v=privacy-20261025";
 
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -21,16 +22,15 @@ function showView(name) {
 }
 $("#nav-chat").onclick = () => { showView("chat"); $("#input").focus(); saveSession(); };
 $("#nav-library").onclick = () => { showView("library"); showTab("page"); saveSession(); };
-window.addEventListener("pagehide", () => { saveSession(); controller?.abort(); });
+window.addEventListener("pagehide", () => {
+  controller?.abort(); history.length = 0; turns.length = 0; clearSession(); Pending.clear(); Settings.clear();
+  document.querySelectorAll("textarea, input").forEach(el => { el.value = ""; });
+  $("#msgs").querySelectorAll(".msg").forEach(el => el.remove()); $("#pend-list").replaceChildren();
+});
+window.addEventListener("pageshow", e => { if (e.persisted) location.reload(); });
 
 // ---------------------------------------------------------------- Markdown
-DOMPurify.addHook("afterSanitizeAttributes", node => {
-  if (node.tagName === "A" && /^https?:/i.test(node.getAttribute("href") || "")) {
-    node.setAttribute("target", "_blank");
-    node.setAttribute("rel", "noopener noreferrer");
-  }
-});
-marked.use({ gfm: true, breaks: false });
+const sanitizeMarkdown = configureMarkdown(DOMPurify, marked, wikiLinks);
 
 function wikiLinks(text) {
   // 表格里模型会把 | 转义成 \|，如 [[pldi27\|PLDI]]
@@ -41,7 +41,7 @@ function wikiLinks(text) {
   });
 }
 function renderMd(text) {
-  return DOMPurify.sanitize(marked.parse(wikiLinks(text || "")));
+  return sanitizeMarkdown(text);
 }
 
 // ---------------------------------------------------------------- 标签页
@@ -155,8 +155,7 @@ function openPage(id, push = true) {
       (s.dl ? ` · ${esc(s.round)} 正文截稿 <b>${esc(s.dl)}</b>` : "") +
       (s.days_left != null ? ` · 剩 <b>${s.days_left}</b> 天` : "") + `</div>`;
   }
-  let html = renderMd(md);
-  html = html.replace(/〔([^〕]+)〕/g, (_, t) => `<span class="prov${/核查|重查/.test(t) ? " ok" : ""}">〔${t}〕</span>`);
+  let html = renderMd(md.replace(/〔([^〕]+)〕/g, (_, t) => `<span class="prov${/核查|重查/.test(t) ? " ok" : ""}">〔${esc(t)}〕</span>`));
   $("#page").innerHTML = (fm ? `<div class="fm">${fm}</div>` : "") + html.replace(/(<\/h1>)/, `$1${live}`);
   $("#page").scrollTop = 0;
   $("#p-back").disabled = !pageHist.length;
@@ -211,7 +210,7 @@ function renderPending() {
           <span class="muted">${esc(x.state)} · ${esc(new Date(x.created).toLocaleString())}</span></div>
         <div class="diff">${old ? `<span class="old">${esc(old)}</span> → ` : ""}<span class="new">${esc(x.value)}</span></div>
         ${x.quote ? `<blockquote>${esc(x.quote)}</blockquote>` : ""}
-        <div class="muted">出处：<a href="${esc(x.evidence_url)}" target="_blank" rel="noopener noreferrer">${esc(x.evidence_url)}</a></div>
+        <div class="muted">出处：<a href="${esc(safeExternalUrl(x.evidence_url) || "#")}" target="_blank" rel="noopener noreferrer">${esc(x.evidence_url)}</a></div>
         <div class="acts">
           <button type="button" class="ghost sm" data-act="采纳">采纳</button>
           <button type="button" class="ghost sm" data-act="驳回">驳回</button>
@@ -228,11 +227,9 @@ function renderPending() {
   const approved = items.filter(x => x.state === "采纳");
   $("#pend-export").disabled = $("#pend-copy").disabled = !approved.length;
   const issue = $("#pend-issue");
-  issue.hidden = !(repo && approved.length);
+  issue.hidden = !(/^[\w.-]+\/[\w.-]+$/.test(repo) && approved.length);
   if (!issue.hidden) {
-    const body = "待审修改（来自 CCF 会议助手），审核后运行 `python apply_pending.py pending.json`：\n\n```json\n" +
-      JSON.stringify(approved, null, 1) + "\n```";
-    issue.href = `https://github.com/${repo}/issues/new?labels=pending-review&title=${encodeURIComponent(`[待审] ${approved.length} 条知识库修改`)}&body=${encodeURIComponent(body).slice(0, 7000)}`;
+    issue.href = `https://github.com/${repo}/issues/new`;
   }
 }
 const approvedJSON = () => JSON.stringify(Pending.list().filter(x => x.state === "采纳"), null, 1);
@@ -253,7 +250,7 @@ function refreshSettingsMode() {
   const personal = $("#settings-form").elements.mode.value === "personal";
   $("#personal-settings").hidden = !personal;
   $("#personal-settings").querySelectorAll("input").forEach(el => el.disabled = !personal);
-  $("#mode-description").textContent = personal ? "使用你自己填写的模型和搜索服务；未填写 DeepSeek Key 时只查知识库。" : "网站提供问答和联网核查服务，无需自行填写 Key。问题及近期对话会发送给模型服务。";
+  $("#mode-description").textContent = personal ? "使用自己的 Step Key；Key 仅在当前页面内存中保留。" : "网站提供问答服务，无需填写 Key。问题及近期对话会发送给 Step；勾选联网核查后才会使用 DeepSeek。";
 }
 function openSettings() {
   const f = $("#settings-form");
@@ -283,8 +280,8 @@ $("#settings-test").onclick = async () => {
   }
   const out = [];
   try {
-    const r = await fetch(f.elements.baseUrl.value.trim().replace(/\/+$/, "") + "/chat/completions", {
-      method: "POST", headers: { Authorization: `Bearer ${f.elements.stepKey.value.trim()}`, "Content-Type": "application/json" },
+    const r = await fetch(modelBaseUrl(f.elements.baseUrl.value.trim()) + "/chat/completions", {
+      method: "POST", redirect: "error", credentials: "omit", cache: "no-store", referrerPolicy: "no-referrer", headers: { Authorization: `Bearer ${f.elements.stepKey.value.trim()}`, "Content-Type": "application/json" },
       body: JSON.stringify({ model: f.elements.model.value.trim(), messages: [{ role: "user", content: "ping" }], max_tokens: 5, reasoning_effort: "low" }),
     });
     out.push(r.ok ? "模型 ✓" : `模型 ✗ ${r.status}`);
@@ -293,7 +290,7 @@ $("#settings-test").onclick = async () => {
   if (dk) {
     try {
       const r = await fetch("https://api.deepseek.com/v1/tools/search", {
-        method: "POST", headers: { Authorization: `Bearer ${dk}`, "Content-Type": "application/json" },
+        method: "POST", redirect: "error", credentials: "omit", cache: "no-store", referrerPolicy: "no-referrer", headers: { Authorization: `Bearer ${dk}`, "Content-Type": "application/json" },
         body: JSON.stringify({ query: "ICLR 2027 call for papers", count: 1 }),
       });
       out.push(r.ok ? "联网 ✓" : `联网 ✗ ${r.status}`);
@@ -303,14 +300,16 @@ $("#settings-test").onclick = async () => {
 };
 $("#effort").value = Settings.get("effort");
 $("#effort").onchange = e => Settings.set("effort", e.target.value);
+$("#allow-web").onchange = e => { Settings.set("allowWeb", String(e.target.checked)); refreshServiceStatus(); };
 
 // ---------------------------------------------------------------- 对话
 const EFFORT_CN = {low:"快速回答",medium:"标准回答",high:"深入分析",xhigh:"深入分析"};
 async function refreshServiceStatus() {
   const status = $("#service-status");
-  if (!sharedMode()) { status.textContent = Settings.get("stepKey") ? `个人服务 · ${Settings.get("deepseekKey") ? "可自动联网" : "仅知识库"}` : "个人服务 · 请先填写 Key"; return; }
+  const web = Settings.get("allowWeb") === "true";
+  if (!sharedMode()) { status.textContent = Settings.get("stepKey") ? `个人服务 · ${web && Settings.get("deepseekKey") ? "已允许联网" : "仅知识库"}` : "个人服务 · 请先填写 Key"; return; }
   status.textContent = "正在连接网站服务…";
-  try { const h = await serviceHealth(); if (!sharedMode()) return; status.textContent = h.ready ? `网站服务 · ${h.search ? "可自动联网核查" : "仅知识库"}` : "网站服务暂不可用，可先浏览会议资料"; }
+  try { const h = await serviceHealth(); if (!sharedMode()) return; status.textContent = h.ready ? `网站服务 · ${web && h.search ? "已允许联网核查" : "仅知识库"}` : "网站服务暂不可用，可先浏览会议资料"; }
   catch { if (sharedMode()) status.textContent = "暂时无法连接，可稍后重试或先查会议资料"; }
 }
 window.addEventListener("online", refreshServiceStatus);
@@ -355,6 +354,7 @@ function setBusy(b) {
   btn.onclick = b ? e => { e.preventDefault(); controller?.abort(); } : null;
   $("#btn-clear").disabled = b;
   $("#input").setAttribute("aria-busy", String(b));
+  $("#allow-web").disabled = b;
 }
 
 function answerActions(foot, turn) {
@@ -456,7 +456,7 @@ $("#input").addEventListener("input", e => {
   $("#hint").textContent = v ? `${v.length} / 4000 字 · ${EFFORT_CN[Settings.get("effort") === "auto" ? routeEffort(v).effort : Settings.get("effort")]}` : "Enter 发送 · Shift+Enter 换行";
   saveSession();
 });
-$("#btn-clear").onclick = () => { if (controller) return; history.length = 0; turns.length = 0; $("#msgs").querySelectorAll(".msg").forEach(el => el.remove()); $("#welcome").hidden = false; $("#input").value = ""; $("#hint").textContent = "Enter 发送 · Shift+Enter 换行"; clearHighlight(); saveSession(); $("#input").focus(); };
+$("#btn-clear").onclick = () => { if (controller) return; history.length = 0; turns.length = 0; Pending.clear(); renderPending(); clearSession(); $("#msgs").querySelectorAll(".msg").forEach(el => el.remove()); $("#welcome").hidden = false; $("#input").value = ""; $("#hint").textContent = "Enter 发送 · Shift+Enter 换行"; clearHighlight(); saveSession(); $("#input").focus(); };
 
 const EXAMPLES = [
   "ICLR 2027 首投有什么坑？现在还来得及吗？",

@@ -1,11 +1,6 @@
-const KEY = "ccf.session.v1";
-export function readSession() {
-  try {
-    const value = JSON.parse(sessionStorage.getItem(KEY) || "{}");
-    if (!value || typeof value !== "object") return {};
-    return value;
-  } catch { return {}; }
-}
-export function writeSession(value) {
-  try { sessionStorage.setItem(KEY, JSON.stringify(value)); } catch { /* Storage can be disabled or full. */ }
-}
+// Conversations and drafts live only in this document's memory.
+try { sessionStorage.removeItem("ccf.session.v1"); sessionStorage.removeItem("ccf.dashboard.v1"); } catch {}
+let current = {};
+export function readSession() { return current; }
+export function writeSession(value) { current = value; }
+export function clearSession() { current = {}; }
