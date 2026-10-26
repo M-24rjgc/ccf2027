@@ -218,7 +218,7 @@ test("usage received before a stream disconnect is retained without claiming a c
 test('network access is off by default even if a model attempts to call a tool',async()=>{
  const env=environment(), original=globalThis.fetch;let calls=0;
  globalThis.fetch=async(url,options)=>{
-  assert.equal(new URL(url).hostname,'api.stepfun.com');assert.equal(options.redirect,'error');
+  assert.equal(new URL(url).hostname,'api.stepfun.com');assert.equal(options.redirect,'manual');assert.equal(options.cache,'no-store');
   const body=JSON.parse(options.body);assert.ok(!body.tools?.some(t=>['web_search','web_fetch','propose_update'].includes(t.function.name)));
   const delta=calls++===0?{tool_calls:[{index:0,id:'attempt',function:{name:'web_search',arguments:'{"query":"ICLR private question"}'}}]}:{content:'仅依据知识库回答'};
   return new Response('data: '+JSON.stringify({choices:[{delta,finish_reason:calls===1?'tool_calls':'stop'}],usage:{prompt_tokens:20,completion_tokens:5}})+'\n\n');
@@ -240,4 +240,14 @@ test('responses disable caches, framing and unused server action/image routes',(
  assert.match(r.headers.get('strict-transport-security'),/max-age/);
  assert.equal(rejectUnsafeRequest(new Request(base+'/_next/image?url=https://evil.test')).status,404);
  assert.equal(rejectUnsafeRequest(new Request(base+'/admin',{method:'POST',headers:{'next-action':'test'},body:'private'})).status,404);
+});
+
+test('upstream redirects are rejected without forwarding credentials or returning their body',async()=>{
+ const env=environment(),original=globalThis.fetch;let calls=0;
+ globalThis.fetch=async(url,options)=>{
+  calls++;assert.equal(new URL(url).hostname,'api.stepfun.com');assert.equal(options.redirect,'manual');assert.equal(options.cache,'no-store');
+  return new Response(env.STEP_API_KEY,{status:302,headers:{Location:'https://untrusted.example/collect'}});
+ };
+ try {const text=await(await handle(request(),env)).text();assert.match(text,/event: error/);assert.ok(!text.includes(env.STEP_API_KEY));assert.equal(calls,1);}
+ finally{globalThis.fetch=original;}
 });

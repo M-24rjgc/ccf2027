@@ -100,7 +100,7 @@ async function deepseek(path, body, signal, config) {
   if (path === "fetch") config.validateFetchUrl(body.url);
   await config.beforeWeb(path);
   const res = await fetch(`https://api.deepseek.com/v1/tools/${path}`, {
-    method: "POST", signal, redirect: "error",
+    method: "POST", signal, redirect: "manual", cache: "no-store",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
@@ -152,7 +152,7 @@ async function streamChat(body, signal, onDelta, config) {
   const base = config.baseUrl.replace(/\/+$/, "");
   const reservation = await config.beforeModel(body);
   const res = await fetch(`${base}/chat/completions`, {
-    method: "POST", signal, redirect: "error",
+    method: "POST", signal, redirect: "manual", cache: "no-store",
     headers: { Authorization: `Bearer ${config.stepKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({ ...body, stream: true }),
   });
