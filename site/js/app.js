@@ -120,11 +120,13 @@ function showLibrary() {
   curPage = null;
   const q = $("#p-search").value.trim().toLowerCase();
   const results = DB.confs.filter(c => `${c.abbr} ${c.full} ${c.dir} ${c.topic}`.toLowerCase().includes(q));
-  $("#page").innerHTML = `<div class="library-title"><h2>会议资料</h2><span>${results.length} 个会议</span><a href="#index" class="wl" data-id="index">知识库目录</a></div>` +
+  $("#page").innerHTML = `<div class="library-title"><h2>会议资料</h2><span>${results.length} 个会议</span><a href="dashboard.html${q ? "#q=" + encodeURIComponent(q) : ""}" target="_blank" rel="noopener">在倒计时看板中筛选 ↗</a><a href="#index" class="wl" data-id="index">知识库目录</a></div>` +
     (results.length ? `<div class="conference-list">${results.map(c => {
       const s = liveState(c);
       const status = s.status === "未截止" ? (s.days_left === 0 ? "不足 1 天" : `剩 ${s.days_left} 天`) : s.status === "TBD" ? "截稿待公布" : s.status;
-      return `<button type="button" class="conference-item" data-page="${esc(c.uid)}"><span><b>${esc(c.abbr)}</b> <span class="tag ${esc(c.ccf)}">${c.ccf === "N" ? "非 CCF" : `CCF-${esc(c.ccf)}`}</span><small>${esc(c.dir)}</small></span><span class="deadline ${s.status === "未截止" ? "open" : ""}">${esc(status)}<small>${esc(s.dl || "")}</small></span></button>`;
+      // same urgency scale as the dashboard: ≤30 days red, ≤90 amber, beyond that green
+      const tone = s.status !== "未截止" ? "" : s.days_left <= 30 ? "open urgent" : s.days_left <= 90 ? "open warn" : "open";
+      return `<button type="button" class="conference-item" data-page="${esc(c.uid)}"><span><b>${esc(c.abbr)}</b> <span class="tag ${esc(c.ccf)}">${c.ccf === "N" ? "非 CCF" : `CCF-${esc(c.ccf)}`}</span><small>${esc(c.dir)}</small></span><span class="deadline ${tone}">${esc(status)}<small>${esc(s.dl || "")}</small></span></button>`;
     }).join("")}</div>` : `<div class="empty">没有找到“${esc(q)}”，试试会议简称或研究方向。<br><button type="button" class="link" id="reset-search">清除搜索</button></div>`);
   $("#page").querySelectorAll("[data-page]").forEach(b => b.onclick = () => openPage(b.dataset.page));
   if ($("#reset-search")) $("#reset-search").onclick = () => { $("#p-search").value = ""; showLibrary(); saveSession(); };

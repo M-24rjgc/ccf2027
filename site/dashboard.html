@@ -1,209 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://ccf2027-api-m24rjgc.decent-hill-0315.chatgpt.site https://api.stepfun.com https://api.deepseek.com; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CCF 2027 会议 · 投稿倒计时看板</title>
-<style>
-:root{
-  --bg:#F4F6F9; --surface:#FFFFFF; --ink:#1B2430; --ink2:#41505F; --muted:#78838F;
-  --line:#E4E8EE; --line2:#EEF1F5; --navy:#1F3552; --accent:#2D6A9F;
-  --red:#C0392B; --redbg:#FBEAE7; --amber:#A9701A; --amberbg:#FCF3E2;
-  --green:#1E7B45; --greenbg:#E6F2EA; --gray:#8B949E; --graybg:#F0F2F5;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-  font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1720px;margin:0 auto;padding:28px 28px 64px}
-
-/* ---- header ---- */
-.hd{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px;flex-wrap:wrap}
-.hd h1{font-size:23px;font-weight:650;letter-spacing:-.3px;color:var(--navy)}
-.hd .sub{color:var(--muted);font-size:12px;margin-top:5px}
-.hd .sub b{color:var(--ink2);font-weight:600}
-.legend{display:flex;gap:14px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
-.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-
-/* ---- stats ---- */
-.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
-.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line)}
-.stat.a::before{background:var(--navy)} .stat.b::before{background:var(--green)}
-.stat.c::before{background:var(--red)} .stat.d::before{background:var(--amber)}
-.stat.e::before{background:var(--accent)} .stat.f::before{background:#7A5C9E}
-.stat .k{font-size:11.5px;color:var(--muted);letter-spacing:.3px}
-.stat .v{font-size:27px;font-weight:640;letter-spacing:-1px;margin-top:2px;font-variant-numeric:tabular-nums}
-.stat .n{font-size:11px;color:var(--muted);margin-top:1px}
-
-/* ---- toolbar ---- */
-.bar{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 16px;margin-bottom:14px;
-  display:flex;gap:14px 20px;align-items:center;flex-wrap:wrap}
-.grp{display:flex;align-items:center;gap:7px}
-.grp > div{display:flex;flex-wrap:wrap;gap:6px}
-.grp.dirs{flex:1 0 100%;align-items:flex-start}
-.grp.dirs > span{margin-top:5px}
-.grp > span{font-size:11px;color:var(--muted);letter-spacing:.4px;white-space:nowrap}
-.chip{border:1px solid var(--line);background:#fff;border-radius:14px;padding:3.5px 11px;font-size:12px;
-  color:var(--ink2);cursor:pointer;transition:.13s;white-space:nowrap;user-select:none}
-.chip:hover{border-color:#C3CEDA;background:#FAFBFD}
-.chip.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:500}
-.chip.k-a.on{background:var(--red);border-color:var(--red)}
-.chip.k-b.on{background:var(--amber);border-color:var(--amber)}
-.chip.k-c.on{background:var(--accent);border-color:var(--accent)}
-input#q{border:1px solid var(--line);border-radius:8px;padding:6.5px 12px;font-size:12.5px;width:240px;
-  outline:none;font-family:inherit;color:var(--ink)}
-input#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,106,159,.1)}
-.clr{margin-left:auto;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;
-  text-underline-offset:2px}
-.clr:hover{color:var(--accent)}
-
-/* ---- table ---- */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.scroll{overflow:auto;max-height:calc(100vh - 210px)}
-table{border-collapse:separate;border-spacing:0;width:100%;font-size:12.5px}
-thead th{position:sticky;top:0;z-index:3;background:var(--navy);color:#fff;font-weight:560;font-size:11.5px;
-  text-align:left;padding:10px 10px;letter-spacing:.3px;white-space:nowrap;cursor:pointer;user-select:none;
-  border-bottom:1px solid var(--navy)}
-thead th:hover{background:#28425F}
-thead th .ar{opacity:.45;font-size:9px;margin-left:3px}
-tbody td{padding:9px 10px;border-bottom:1px solid var(--line2);vertical-align:middle}
-tbody tr:hover td{background:#F7FAFD}
-tbody tr.closed td{color:#9AA4AF}
-tbody tr.closed td.name b{color:#9AA4AF}
-td.name b{font-weight:620;color:var(--ink);font-size:13px}
-td.name .fn{display:block;color:var(--muted);font-size:10.5px;line-height:1.35;margin-top:1px;
-  max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-td.tp{max-width:250px;color:var(--ink2);font-size:11.5px;line-height:1.45}
-td.nbcell{max-width:270px;font-size:11.5px;line-height:1.4;color:var(--ink2)}
-.nbdot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#7A5C9E;
-  margin-right:5px;vertical-align:2px}
-.mono{font-family:"SF Mono",Consolas,"Roboto Mono",monospace;font-size:11.5px;
-  font-variant-numeric:tabular-nums;letter-spacing:-.2px;white-space:nowrap}
-.rl{display:block;max-width:125px;overflow:hidden;text-overflow:ellipsis;font-family:inherit;
-  font-size:10px;color:var(--muted);letter-spacing:0;margin-top:1px}
-.tag{display:inline-block;padding:1.5px 7px;border-radius:5px;font-size:10.5px;font-weight:600;letter-spacing:.2px}
-.t-A{background:var(--redbg);color:#9C1F1F} .t-B{background:var(--amberbg);color:#8A5A10}
-.t-C{background:#E7F0FA;color:#1D4E7E} .t-N{background:var(--graybg);color:#6B7480}
-.days{font-weight:660;font-variant-numeric:tabular-nums}
-.d-urgent{color:var(--red)} .d-warn{color:var(--amber)} .d-ok{color:var(--green)} .d-off{color:var(--gray);font-weight:400}
-.st{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:1px}
-.s-open{background:var(--green)} .s-closed{background:#C4CBD4} .s-tbd{background:var(--amber)}
-.vs{font-size:11px;padding:1.5px 7px;border-radius:5px;white-space:nowrap}
-.vs-ok{background:var(--greenbg);color:var(--green);font-weight:600}
-.vs-np{background:var(--amberbg);color:var(--amber)}
-.vs-un{background:var(--graybg);color:var(--gray)}
-.muted{color:var(--muted)}
-.empty{padding:56px;text-align:center;color:var(--muted);font-size:13px}
-.foot{margin-top:16px;font-size:11.5px;color:var(--muted);line-height:1.85}
-.foot b{color:var(--ink2);font-weight:600}
-a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-button,input,select{font:inherit}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.site-nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 28px;background:var(--surface);border-bottom:1px solid var(--line)}
-.site-nav strong{font-size:17px;color:var(--ink)}
-.site-nav nav{display:flex;gap:8px;align-items:center}
-.site-nav nav a,.site-nav nav span{padding:7px 10px;border-radius:8px}
-.site-nav [aria-current]{background:var(--graybg);font-weight:600}
-.back-home{font-weight:600}
-.grp{flex-wrap:wrap}
-.dirs summary{cursor:pointer;color:var(--ink2);font-weight:600}
-.dirs #dirs{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.bar .dirs{width:100%}
-.chip{background:var(--surface);min-height:32px}
-.clr{border:0;background:none;padding:8px}
-.results-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:10px 2px;color:var(--ink2)}
-.results-bar label{margin-left:auto;cursor:pointer}
-.results-bar .muted{font-size:12px}
-.scroll{max-height:70vh}
-table{min-width:880px}
-table:not(.expanded) :is(th,td):nth-child(6),table:not(.expanded) :is(th,td):nth-child(7),table:not(.expanded) :is(th,td):nth-child(8),table:not(.expanded) :is(th,td):nth-child(9),table:not(.expanded) :is(th,td):nth-child(11){display:none}
-td.name{position:sticky;left:0;z-index:1;background:var(--surface);min-width:160px;max-width:200px;border-right:1px solid var(--line)}
-td.name .fn{max-width:180px}
-thead th:first-child{left:0;z-index:4}
-thead button{border:0;background:none;color:inherit;cursor:pointer;white-space:nowrap}
-.empty button{display:block;margin:12px auto;border:1px solid var(--line);padding:8px 12px;border-radius:8px;background:var(--surface);color:var(--accent);cursor:pointer}
-td.name a b{color:var(--accent)}
-@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.wrap{padding:18px 14px 40px}}
-@media(max-width:600px){
- .site-nav{padding:10px 12px;flex-wrap:wrap;gap:6px}.site-nav nav{width:100%;justify-content:space-between}
- .wrap{padding:16px 12px 32px}.hd{margin-bottom:14px;gap:10px}.hd h1{font-size:20px}
- .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.stat{padding:8px}.stat .k{font-size:11px;min-height:32px}.stat .v{font-size:23px}.stat .n,.stat:nth-child(n+5){display:none}
- .bar{padding:12px;gap:10px}input#q{width:100%;font-size:16px;order:-1}.grp{gap:6px}.chip{padding:5px 9px}
- table:not(.expanded){min-width:520px}table:not(.expanded) :is(th,td):nth-child(2),table:not(.expanded) :is(th,td):nth-child(10),table:not(.expanded) :is(th,td):nth-child(12),table:not(.expanded) :is(th,td):nth-child(13){display:none}
- td.name{min-width:110px;max-width:130px}td.name .fn{max-width:110px;font-size:10px}.results-bar .muted{flex-basis:100%}
-}
-@media(prefers-color-scheme:dark){
- :root{--bg:#0F141A;--surface:#161C24;--ink:#E6EBF1;--ink2:#B6C1CD;--muted:#8592A0;--line:#273140;--line2:#212A36;--navy:#3A5A85;--accent:#6FA8DC;--graybg:#212A36;--green:#6CC891;--greenbg:#1A2E22;--amber:#E2AD5A;--amberbg:#33281A;--red:#F08A80;--redbg:#3A1E1C;color-scheme:dark}
- .hd h1{color:var(--ink)}.chip:hover,tbody tr:hover td{background:#1B232D}input#q{background:var(--surface)}
- .t-A{color:var(--red)}.t-B{color:var(--amber)}.t-C{background:#1C2A3A;color:var(--accent)}
-}
-</style>
+<title>2027 投稿倒计时 · CCF 会议助手</title>
+<meta name="description" content="CCF 推荐会议 2027 届投稿倒计时：截稿统一折算北京时间，实时剩余天数，按方向、等级、新人条款筛选，可导出日历。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F3552'/%3E%3Ccircle cx='10' cy='11' r='3.2' fill='%23fff'/%3E%3Ccircle cx='22' cy='9' r='2.4' fill='%23F2B84B'/%3E%3Ccircle cx='19' cy='22' r='3.6' fill='%23fff'/%3E%3Cpath d='M10 11L19 22M22 9L19 22M10 11L22 9' stroke='%23fff' stroke-width='1.4' opacity='.7'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="dashboard.css?v=47849848f4">
 </head>
 <body>
-<header class="site-nav">
-  <a class="home-link" href="index.html#chat"><strong>CCF 会议助手</strong></a>
-  <nav aria-label="主导航"><a class="home-link back-home" href="index.html#chat">← 返回问答</a><a class="home-link" href="index.html#library">查会议</a><span aria-current="page">倒计时看板</span></nav>
+<a class="skip" href="#results">跳到会议列表</a>
+<header class="top">
+  <a class="brand home-link" href="index.html#chat" aria-label="CCF 会议助手首页">
+    <span class="logo" aria-hidden="true"></span>
+    <span class="brand-text"><b>CCF 会议助手</b><small>2027 投稿倒计时</small></span>
+  </a>
+  <nav class="topnav" aria-label="主导航">
+    <a class="home-link" href="index.html#chat">问答</a>
+    <a class="home-link" href="index.html#library">查会议</a>
+    <a class="on" aria-current="page">倒计时看板</a>
+  </nav>
 </header>
-<div class="wrap">
 
-  <div class="hd">
+<main class="wrap">
+  <section class="hero">
     <div>
       <h1>2027 投稿倒计时</h1>
-      <div class="sub">200 个会议 · 截稿均为<b>北京时间</b> · 当前 <span id="nowtxt"></span><br>点击会议名查看投稿规则与来源。</div>
+      <p class="lede"><span id="n-total">—</span> 个会议 · 截稿统一折算为<b>北京时间</b><span class="long"> · 剩余时间按此刻实时计算</span></p>
     </div>
-    <div class="legend">
-      <span><i style="background:var(--red)"></i>≤30 天</span>
-      <span><i style="background:var(--amber)"></i>31–90 天</span>
-      <span><i style="background:var(--green)"></i>90 天以上</span>
-      <span><i style="background:#C4CBD4"></i>已截止</span>
+    <p class="clock"><span>北京时间</span><time id="now">—</time></p>
+  </section>
+
+  <section class="filters" aria-label="筛选会议">
+    <div class="frow">
+      <label class="search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+        <input id="q" type="search" placeholder="搜会议名、主题、地点…" autocomplete="off" spellcheck="false" aria-label="搜索会议" aria-keyshortcuts="/">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+      <div class="fgrp" role="group" aria-labelledby="lbl-ccf"><span class="flabel" id="lbl-ccf">CCF</span><div class="seg" id="ccfs"></div></div>
+      <div class="fgrp" role="group" aria-label="条款与信息">
+        <button type="button" class="chip" data-flag="nb" aria-pressed="false" title="审稿义务、首投配额、资深作者、账号门槛、学生通道等"><i class="dot nb"></i>有新人条款</button>
+        <button type="button" class="chip" data-flag="gap" aria-pressed="false" title="截稿日、到场要求或新人条款仍待官方确认">信息待补</button>
+      </div>
+      <button type="button" class="reset" id="clr" hidden>清除筛选</button>
+    </div>
+    <div class="frow dirs" role="group" aria-labelledby="lbl-dir"><span class="flabel" id="lbl-dir">方向</span><div class="chips" id="dirs"></div></div>
+  </section>
+
+  <section class="overview" aria-label="概览">
+    <div class="tiles" id="tiles" role="group" aria-label="按截稿状态查看">
+      <button type="button" class="tile" data-st="all"><span class="k">全部</span><span class="v" id="t-all">—</span><span class="n">当前筛选范围</span></button>
+      <button type="button" class="tile open" data-st="open"><span class="k"><i></i>还能投</span><span class="v" id="t-open">—</span><span class="n">有未过期轮次</span></button>
+      <button type="button" class="tile soon" data-st="soon"><span class="k"><i></i>30 天内截稿</span><span class="v" id="t-soon">—</span><span class="n" id="t-soon-n">抓紧</span></button>
+      <button type="button" class="tile tbd" data-st="tbd"><span class="k"><i></i>日期待公布</span><span class="v" id="t-tbd">—</span><span class="n">2027 征稿未出</span></button>
+      <button type="button" class="tile closed" data-st="closed"><span class="k"><i></i>已截止</span><span class="v" id="t-closed">—</span><span class="n">看次轮或下一届</span></button>
+    </div>
+    <figure class="chart">
+      <figcaption><b>未来 16 周截稿分布</b><span id="chart-hint">每周有几个会议截稿 · 点柱子只看那一周</span></figcaption>
+      <div class="plot" id="plot"></div>
+      <div class="tip" id="tip" role="tooltip" hidden></div>
+    </figure>
+  </section>
+
+  <div class="results" id="results" tabindex="-1">
+    <div class="results-main">
+      <p class="count" id="count" role="status" aria-live="polite"></p>
+      <div class="active" id="active"></div>
+    </div>
+    <div class="results-actions">
+      <label class="msort">排序
+        <select id="msort">
+          <option value="days:1">剩余时间 ↑</option>
+          <option value="days:-1">剩余时间 ↓</option>
+          <option value="ccf:1">CCF 等级</option>
+          <option value="acc:1">录用率 低→高</option>
+          <option value="acc:-1">录用率 高→低</option>
+          <option value="abbr:1">会议名 A→Z</option>
+        </select>
+      </label>
+      <button type="button" class="btn" id="ics" title="把列表中仍可投会议的摘要与正文截稿导出为日历文件，提前 3 天和 1 天提醒">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4.5" width="14" height="12" rx="2"/><path d="M3 8.5h14M7 2.5v4M13 2.5v4"/></svg><span>导出日历</span>
+      </button>
     </div>
   </div>
 
-  <div class="stats">
-    <div class="stat a"><div class="k">会议总数</div><div class="v">200</div><div class="n">CCF-A 43 · B 74 · C 58 · N 25</div></div>
-    <div class="stat b"><div class="k">还可以投</div><div class="v" id="s-open">–</div><div class="n">有未过期轮次</div></div>
-    <div class="stat c"><div class="k">30 天内截止</div><div class="v" id="s-soon">–</div><div class="n">按北京时间计</div></div>
-    <div class="stat d"><div class="k">已截止</div><div class="v" id="s-closed">–</div><div class="n">可看下一年或次轮</div></div>
-    <div class="stat e"><div class="k">官网已核实</div><div class="v">149</div><div class="n">参会与投稿规则来自官方</div></div>
-    <div class="stat f"><div class="k">有新人作者条款</div><div class="v">79</div><div class="n">首投 / 学生作者另有规定</div></div>
-  </div>
-
-  <div class="bar">
-    <details class="dirs"><summary>按研究方向筛选</summary><div id="dirs"></div></details>
-    <div class="grp"><span>评级</span><div id="ccfs"></div></div>
-    <div class="grp"><span>状态</span>
-      <button type="button" class="chip on" data-st="all">全部</button>
-      <button type="button" class="chip" data-st="未截止">可投</button>
-      <button type="button" class="chip" data-st="30">30 天内</button>
-      <button type="button" class="chip" data-st="nb">有新人条款</button>
-      <button type="button" class="chip" data-st="gap">信息待补 112</button>
-      <button type="button" class="chip" data-st="已截止">已截止</button>
-    </div>
-    <input id="q" type="search" aria-label="搜索看板会议" placeholder="搜会议名 / 主题 / 地点…">
-    <button type="button" class="clr" id="clr">重置筛选</button>
-  </div>
-  <div class="results-bar"><b id="result-count" role="status"></b><label><input type="checkbox" id="all-columns"> 显示全部列</label><span class="muted">横向滚动查看其余列 · 点击表头排序</span></div>
-  <div class="card">
-    <div class="scroll">
-      <table>
-        <thead><tr id="th"></tr></thead>
-        <tbody id="tb"></tbody>
-      </table>
-      <div class="empty" id="empty" style="display:none">没有符合条件的会议，试试减少筛选条件。<button type="button" id="empty-reset">重置筛选</button></div>
+  <div class="table-card">
+    <table id="tbl">
+      <caption class="sr">会议截稿列表，点任意一行查看详情</caption>
+      <thead><tr id="th"></tr></thead>
+      <tbody id="tb"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden>
+      <p><b>没有符合条件的会议</b></p>
+      <p class="muted">放宽一个条件试试，或者</p>
+      <button type="button" class="btn" id="empty-reset">清除全部筛选</button>
     </div>
   </div>
 
-  <div class="foot">
-    <b>怎么读这张表</b>　「正文截稿」是按北京时间算的，177 个会议的原始时区是 AoE / UTC−12，折算后要 +20 小时，<b>174 个会议的截稿日因此顺延了一天</b>，别拿 ccfddl 上的日期直接对照。多轮会议过了一轮会自动切到下一轮。<br>
-    「官网核查」为<b>已核实</b>的行，参会形式与投稿上限来自官方页面原文；<b>2027 CFP 未发布</b>表示官网还没有 2027 征稿说明，字段一律留「待确认」，没有用往届口径冒充。<br>
-    「投稿上限」只填官方明文写出的数字，没写就是「不限」，已统一成「N 篇/届、/轮、/年」，点表头可按篇数排序。ACL / NAACL / EACL / COLING 走 ARR 滚动审稿，主表里的日期是 commit 节点，真实投稿看 ARR cycle。<br>
-    「<b>新人作者条款</b>」专指首投者会踩的坑：审稿义务/互惠审稿、首投配额、是否强制挂资深作者、投稿账号门槛、学生新人通道。点顶部<b>「有新人条款」</b>可只看这些会；<b>「无专属条款」是查过确实没有，不是没查</b>。
-  </div>
-</div>
+  <section class="notes" aria-labelledby="notes-h">
+    <h2 id="notes-h">怎么读这张表</h2>
+    <ul>
+      <li><b>时间都是北京时间。</b><span id="m-aoe">—</span> 个会议的原始时区是 AoE / UTC−12，折算要 +20 小时，<span id="m-shift">—</span> 个会议的截稿日因此顺延一天，别拿 ccfddl 上的日期直接对照。多轮会议过了一轮自动切到下一轮。</li>
+      <li><b>摘要截稿往往早一周。</b>有独立摘要注册的会议，在截稿日期下方单独标出，没注册摘要就交不了正文。</li>
+      <li><b>「已核实」</b>表示参会形式与投稿上限来自官方页面原文；<b>「2027 CFP 未发布」</b>表示官网还没有 2027 征稿说明，相关字段留「待确认」，不拿往届口径冒充。</li>
+      <li><b>投稿上限</b>只写官方明文给出的数字，没写就是「不限」。ACL / NAACL / EACL / COLING 走 ARR 滚动审稿，表里是 commit 节点，实际投稿看 ARR cycle。</li>
+      <li><b>新人作者条款</b>专指首投者容易踩的坑：审稿义务、首投配额、强制资深作者、账号门槛、学生通道。「无专属条款」是查过确实没有，不是没查。</li>
+      <li><b>录用率</b>取 ccfddl 汇总的往届数据（MIT 许可），仅供参考。</li>
+    </ul>
+    <p class="muted small">数据更新于 <span id="m-gen">—</span>（北京时间）· 截稿以会议官网为准 · <a class="home-link" href="index.html#library">在知识库里查看每个字段的出处</a></p>
+  </section>
+</main>
 
-<script src="js/dashboard.js?v=privacy-20261025"></script>
+<dialog class="drawer" id="drawer" aria-labelledby="dw-title">
+  <div class="dw" id="dw"></div>
+</dialog>
+<button type="button" class="totop" id="totop" aria-label="回到顶部" hidden>
+  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 15V5M5 10l5-5 5 5"/></svg>
+</button>
+
+<script src="js/dashboard-data.js?v=84151e597d"></script>
+<script src="js/dashboard.js?v=17f9b7c295"></script>
 </body>
 </html>

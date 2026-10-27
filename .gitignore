@@ -10,3 +10,7 @@ AGENTS.md
 slices/
 *_slices/
 .sites-runtime/
+# 宣传片的生成物（截图、配乐、预览帧、成片）都能用 promo/ 里的脚本重新生成
+promo/assets/
+promo/out/
+promo/*.mp4

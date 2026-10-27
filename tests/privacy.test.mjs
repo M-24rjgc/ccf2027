@@ -68,3 +68,39 @@ test('conversation, keys and pending text never persist to browser storage',asyn
   Settings.clear();session.clearSession();assert.equal(Settings.get('stepKey'),'');assert.deepEqual(session.readSession(),{});
  }finally{delete globalThis.localStorage;delete globalThis.sessionStorage;dom.window.close();}
 });
+
+test('personal keys go only to provider auth headers and never enter shared requests or error text',async()=>{
+ const {Settings}=await import('../site/js/store.js?v=privacy-20261025');
+ const {loadWiki}=await import('../site/js/data.js');
+ const {ask}=await import('../site/js/agent.js');
+ const original=globalThis.fetch;
+ const secrets=['SYNTHETIC_PERSONAL_STEP','SYNTHETIC_PERSONAL_SEARCH'];
+ const ui={signal:new AbortController().signal};
+ try {
+  globalThis.fetch=async()=>Response.json(JSON.parse(read('../site/data/wiki.json')));
+  await loadWiki();
+  Settings.set('mode','personal');Settings.set('stepKey',secrets[0]);Settings.set('deepseekKey',secrets[1]);
+  Settings.set('allowWeb','false');
+  let count=0;
+  globalThis.fetch=async(url,options)=>{
+   count++;
+   assert.equal(url,'https://api.stepfun.com/step_plan/v1/chat/completions');
+   assert.equal(options.headers.Authorization,'Bearer '+secrets[0]);
+   assert.equal(options.redirect,'error');assert.equal(options.cache,'no-store');assert.equal(options.referrerPolicy,'no-referrer');
+   for(const secret of secrets)assert.ok(!options.body.includes(secret));
+   return new Response('data: '+JSON.stringify({choices:[{delta:{content:'公开会议资料'},finish_reason:'stop'}]})+'\n\ndata: [DONE]\n\n');
+  };
+  assert.equal((await ask([],'ICLR 截稿',ui)).text,'公开会议资料');assert.equal(count,1);
+  globalThis.fetch=async()=>new Response(secrets.join(' '),{status:401});
+  await assert.rejects(ask([],'ICLR 截稿',ui),e=>!secrets.some(s=>e.message.includes(s))&&e.message.includes('401'));
+  Settings.set('mode','shared');
+  globalThis.fetch=async(url,options)=>{
+   assert.match(url,/^https:\/\/ccf2027-api-m24rjgc\.decent-hill-0315\.chatgpt\.site\/api\/ask$/);
+   assert.equal(options.headers.Authorization,undefined);
+   for(const secret of secrets)assert.ok(!JSON.stringify(options).includes(secret));
+   assert.deepEqual(Object.keys(JSON.parse(options.body)).sort(),['allowWeb','effort','history','text']);
+   return new Response('event: done\ndata: {"text":"完成","visited":[]}\n\n',{headers:{'Content-Type':'text/event-stream'}});
+  };
+  assert.equal((await ask([],'ICLR 截稿',ui)).text,'完成');
+ } finally {globalThis.fetch=original;Settings.clear();}
+});

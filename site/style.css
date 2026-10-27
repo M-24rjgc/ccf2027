@@ -229,6 +229,10 @@ fieldset input { display: block; width: 100%; margin-top: 3px; border: 1px solid
 .conference-item small { display:block; margin-top:3px; color:var(--muted); font-size:12px; }
 .deadline { text-align:right; flex:none; color:var(--muted); font-size:13px; }
 .deadline.open { color:var(--green); }
+.deadline.warn { color:var(--amber); }
+.deadline.urgent { color:var(--red); font-weight:600; }
+.library-title a:not(.wl) { margin-left:auto; font-size:12.5px; }
+.library-title a:not(.wl) + a { margin-left:0; }
 #g-feedback { padding:0 12px; color:var(--ink2); font-size:12px; }
 #g-feedback:empty { display:none; }
 .md th, .md td { white-space:normal; min-width:100px; max-width:320px; overflow-wrap:anywhere; }

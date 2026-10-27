@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>CCF 会议助手 · 宣传片</title>
+<style>
+html, body { margin: 0; background: #05090F; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: #fff; background: #0B1626;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+.layer, .scene { position: absolute; inset: 0; }
+.scene { opacity: 0; }
+.a { position: absolute; will-change: transform, opacity; }
+
+/* background */
+#bg-glow { background: radial-gradient(1100px 760px at 18% 8%, #1E3C63 0%, rgba(30, 60, 99, 0) 62%),
+  radial-gradient(1000px 700px at 88% 95%, rgba(46, 86, 140, .55) 0%, rgba(46, 86, 140, 0) 60%), #0B1626; }
+#bg-dots { position: absolute; left: -200px; top: -200px; width: 2600px; height: 1600px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, .075) 1.3px, transparent 1.6px); background-size: 38px 38px; }
+#bg-net { position: absolute; inset: 0; }
+#vignette { background: radial-gradient(1400px 900px at 50% 50%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .45) 100%); pointer-events: none; }
+#fade { background: #05090F; opacity: 0; }
+
+/* text */
+.h1 { font-size: 100px; font-weight: 700; letter-spacing: 2px; white-space: nowrap; }
+.h2 { font-size: 64px; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
+.h3 { font-size: 50px; font-weight: 700; letter-spacing: .5px; white-space: nowrap; }
+.sub { font-size: 34px; color: #B7C6D9; white-space: nowrap; }
+.small { font-size: 26px; color: #9FB1C7; white-space: nowrap; }
+.h3 .small { font-weight: 400; margin-left: 26px; }
+.y { color: #F2B84B; }
+.center { left: 0; right: 0; text-align: center; }
+.pill { display: inline-flex; align-items: center; gap: 12px; padding: 12px 26px; border-radius: 999px; font-size: 28px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); color: #E3EAF3; }
+.pill i { width: 12px; height: 12px; border-radius: 50%; background: #F2B84B; display: inline-block; }
+.kicker { font-size: 24px; letter-spacing: 6px; color: #F2B84B; font-weight: 700; }
+
+/* time zone rows */
+.tzrow { position: absolute; left: 0; right: 0; height: 104px; }
+.badge { position: absolute; top: 18px; height: 68px; min-width: 170px; padding: 0 20px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  font-size: 34px; font-weight: 700; background: #F2F5F9; color: #1F3552; }
+.chip { position: absolute; top: 6px; height: 92px; width: 470px; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; padding: 0 30px; box-sizing: border-box; }
+.chip b { font-size: 40px; font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif; font-variant-numeric: tabular-nums; letter-spacing: .5px; }
+.chip span { font-size: 22px; opacity: .8; margin-top: 2px; }
+.chip.raw { background: rgba(255, 255, 255, .06); border: 2px dashed rgba(255, 255, 255, .28); color: #D7E0EA; }
+.chip.bj { background: #FFFFFF; color: #1B2430; box-shadow: 0 18px 40px rgba(0, 0, 0, .35); }
+.chip.bj span { color: #2D6A9F; opacity: 1; font-weight: 700; }
+.arrow { position: absolute; top: 50px; height: 4px; background: #F2B84B; border-radius: 2px; transform-origin: 0 50%; }
+.arrow::after { content: ""; position: absolute; right: -4px; top: -9px; border-left: 18px solid #F2B84B; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+.plus { position: absolute; top: 24px; height: 56px; padding: 0 18px; border-radius: 28px; background: #F2B84B; color: #1B2430; font-size: 28px; font-weight: 700; display: flex; align-items: center; }
+
+/* browser frame */
+.frame-wrap { position: absolute; }
+.frame { position: absolute; left: 0; top: 0; border-radius: 18px; overflow: hidden; background: #fff; transform-origin: 50% 50%;
+  box-shadow: 0 50px 120px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .12); }
+.bar { height: 44px; background: #E9EDF2; display: flex; align-items: center; gap: 9px; padding: 0 18px; box-sizing: border-box; }
+.bar i { width: 13px; height: 13px; border-radius: 50%; display: inline-block; }
+.bar .url { margin-left: 18px; flex: 1; height: 28px; border-radius: 8px; background: #fff; color: #5A6775; font-size: 16px; display: flex; align-items: center; padding: 0 14px; font-family: "Segoe UI", sans-serif; }
+.content { position: absolute; left: 0; top: 44px; overflow: hidden; background: #F4F6F9; }
+.screen { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform-origin: 0 0; }
+.screen img { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; opacity: 0; }
+.spot { position: absolute; border: 4px solid #F2B84B; border-radius: 14px; box-sizing: border-box; box-shadow: 0 0 0 4000px rgba(6, 12, 22, .5); }
+.spot-label { position: absolute; padding: 12px 24px; border-radius: 999px; background: #F2B84B; color: #1B2430; font-size: 28px; font-weight: 700; white-space: nowrap; box-shadow: 0 12px 30px rgba(0, 0, 0, .35); }
+.typed { position: absolute; left: 31px; top: 695px; width: 616px; height: 82px; background: #F8FAFC; }
+.typed p { margin: 0; position: absolute; left: 11px; top: 8px; width: 593px; font-size: 14px; line-height: 22.4px; color: #1B2430; font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+.typed .caret { display: inline-block; width: 1.5px; height: 17px; background: #1B2430; vertical-align: -3px; margin-left: 1px; }
+.tl-badge { position: absolute; right: 22px; top: 62px; padding: 10px 20px; border-radius: 12px; background: rgba(11, 22, 38, .88); color: #fff; font-size: 24px;
+  display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
+.tl-badge i { width: 12px; height: 12px; border-radius: 50%; background: #F05A4F; display: inline-block; }
+.tl-badge b { font-family: "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; color: #F2B84B; }
+
+/* phone */
+.phone { position: absolute; width: 372px; height: 790px; border-radius: 58px; background: #0F1620; padding: 14px; box-sizing: border-box;
+  box-shadow: 0 50px 110px rgba(0, 0, 0, .6), 0 0 0 2px rgba(255, 255, 255, .14) inset; }
+.phone img { width: 344px; height: 762px; border-radius: 46px; object-fit: cover; object-position: top; display: block; }
+.phone::before { content: ""; position: absolute; left: 50%; top: 24px; width: 100px; height: 28px; margin-left: -50px; border-radius: 14px; background: #0F1620; z-index: 2; }
+.phone::after { content: ""; position: absolute; left: 14px; right: 14px; top: 14px; height: 52px; border-radius: 46px 46px 0 0; background: #F4F6F9; z-index: 1; }
+
+/* reasoning chain */
+#trace { position: absolute; left: 110px; top: 200px; width: 610px; }
+.tstep { position: absolute; left: 0; width: 610px; display: flex; gap: 14px; align-items: baseline; font-size: 21px; color: #C9D5E3; white-space: nowrap; }
+.tstep .n { width: 30px; text-align: right; color: #7E92AA; font-family: "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; flex: none; }
+.tstep .tool { flex: none; padding: 2px 12px; border-radius: 8px; font-size: 19px; font-weight: 700; color: #0B1626; }
+.tstep .what { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tool.filter { background: #F2B84B; } .tool.search { background: #7DB2E3; } .tool.read { background: #B9C7D8; }
+#chain { position: absolute; inset: 0; }
+.gnode text { font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif; }
+.legend-row { position: absolute; display: flex; gap: 28px; font-size: 22px; color: #B7C6D9; }
+.legend-row span { display: inline-flex; align-items: center; gap: 10px; }
+.legend-row i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+
+/* wiki */
+.bignum { font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif; font-weight: 700; font-size: 120px; line-height: 1; letter-spacing: -2px; }
+.bignum small { font-family: "Microsoft YaHei UI", sans-serif; font-size: 30px; font-weight: 400; color: #B7C6D9; letter-spacing: 0; margin-left: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 12px; }
+.chips span { padding: 7px 16px; border-radius: 999px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); font-size: 22px; color: #DCE5EF; white-space: nowrap; }
+.note { font-size: 26px; line-height: 1.6; color: #B7C6D9; white-space: normal; }
+
+/* newbie clause cards */
+.card { position: absolute; width: 540px; height: 200px; box-sizing: border-box; padding: 26px 30px; border-radius: 22px; background: #fff; color: #1B2430;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .35); }
+.card .top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.card .top b { font-size: 34px; letter-spacing: -.3px; }
+.card .ccf { font-size: 18px; font-weight: 700; padding: 3px 10px; border-radius: 7px; }
+.ccf.A { background: #FBEAE7; color: #C0392B; } .ccf.B { background: #FCF3E2; color: #B8741A; } .ccf.C { background: #EAF2FA; color: #2D6A9F; } .ccf.N { background: #EEF1F5; color: #6E7A87; }
+.card .kind { margin-left: auto; font-size: 20px; font-weight: 700; padding: 5px 14px; border-radius: 999px; }
+.kind.hard { background: #F1ECF8; color: #6E4FA0; } .kind.perk { background: #E6F2EA; color: #1E7B45; }
+.card p { margin: 0; font-size: 25px; line-height: 1.5; color: #2B3846; }
+
+/* stat bars */
+.statrow { position: absolute; width: 880px; }
+.statrow .t { font-size: 30px; font-weight: 700; margin-bottom: 14px; }
+.statrow .t span { font-weight: 400; font-size: 24px; color: #9FB1C7; margin-left: 14px; }
+.sbar { display: flex; height: 44px; gap: 4px; }
+.sbar div { height: 100%; transform-origin: 0 50%; }
+.sbar div:first-child { border-radius: 10px 0 0 10px; } .sbar div:last-child { border-radius: 0 10px 10px 0; }
+.slab { display: flex; gap: 30px; margin-top: 12px; font-size: 23px; color: #C9D5E3; }
+.slab span { display: inline-flex; align-items: center; gap: 9px; }
+.slab i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+.slab b { font-family: "Segoe UI", sans-serif; color: #fff; font-size: 26px; }
+.ladder { display: flex; gap: 12px; margin-top: 4px; }
+.ladder span { display: inline-flex; flex-direction: column; padding: 10px 18px; border-radius: 14px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); font-size: 22px; color: #DCE5EF; }
+.ladder span b { font-family: "Segoe UI", sans-serif; font-size: 30px; color: #F2B84B; }
+.inset { position: absolute; overflow: hidden; border-radius: 20px; background: #fff; box-shadow: 0 40px 100px rgba(0, 0, 0, .5); }
+.inset img { position: absolute; }
+.inset .spot { box-shadow: 0 0 0 4000px rgba(6, 12, 22, .42); }
+
+/* stats */
+.stat { position: absolute; top: 360px; width: 380px; text-align: center; }
+.stat b { display: block; font-size: 140px; line-height: 1.1; font-weight: 700; font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif; letter-spacing: -2px; }
+.stat span { display: block; font-size: 30px; color: #B7C6D9; margin-top: 8px; }
+.stat::after { content: ""; display: block; width: 64px; height: 6px; border-radius: 3px; background: #F2B84B; margin: 26px auto 0; }
+
+.url-pill { display: inline-flex; align-items: center; gap: 14px; padding: 18px 40px; border-radius: 999px; background: #F2B84B; color: #142236;
+  font-size: 40px; font-weight: 700; font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif; letter-spacing: .5px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="bg-glow"></div>
+  <div class="layer" style="overflow:hidden"><div id="bg-dots"></div></div>
+  <svg id="bg-net" viewBox="0 0 1920 1080"></svg>
+
+  <!-- 1 · intro -->
+  <section class="scene" id="s1">
+    <svg class="a" id="logo" width="220" height="220" viewBox="0 0 32 32" style="left:850px;top:220px">
+      <rect width="32" height="32" rx="7" fill="#1F3552" stroke="rgba(255,255,255,.18)" stroke-width=".3"/>
+      <path id="logo-e" d="M10 11L19 22M22 9L19 22M10 11L22 9" stroke="#fff" stroke-width="1.4" stroke-linecap="round" fill="none" opacity=".75"/>
+      <circle id="logo-n1" cx="10" cy="11" r="3.2" fill="#fff"/>
+      <circle id="logo-n2" cx="22" cy="9" r="2.4" fill="#F2B84B"/>
+      <circle id="logo-n3" cx="19" cy="22" r="3.6" fill="#fff"/>
+    </svg>
+    <div class="a h1 center" id="s1-title" style="top:480px">CCF 会议助手</div>
+    <div class="a sub center" id="s1-sub" style="top:620px">2027 届 <span class="y" id="s1-n">200</span> 个会议的截稿、规则与选会，一处看清</div>
+    <div class="a center" id="s1-pills" style="top:720px;display:flex;justify-content:center;gap:20px">
+      <span class="pill a" style="position:relative"><i></i>倒计时看板</span>
+      <span class="pill a" style="position:relative"><i></i>Agent 选会</span>
+      <span class="pill a" style="position:relative"><i></i>Wiki 知识库</span>
+      <span class="pill a" style="position:relative"><i></i>知识图谱推理</span>
+    </div>
+  </section>
+
+  <!-- 2 · time zones -->
+  <section class="scene" id="s2">
+    <div class="a h2 center" id="s2-title" style="top:150px">截稿时间，<span class="y">各写各的时区</span></div>
+    <div class="a small" id="s2-l" style="left:475px;top:300px">官网写的</div>
+    <div class="a small" id="s2-r" style="left:1105px;top:300px">看板显示</div>
+    <div id="s2-rows"></div>
+    <div class="a sub center" id="s2-cap" style="top:820px">统一折算为<b style="color:#fff">北京时间</b> · <span class="y" id="s2-aoe">—</span> 个会议用 AoE / UTC−12 · <span class="y" id="s2-shift">—</span> 个截稿日因此顺延一天</div>
+  </section>
+
+  <!-- 3 · dashboard -->
+  <section class="scene" id="s3">
+    <div class="a h3" id="s3-h1" style="left:120px;top:58px">投稿倒计时看板<span class="small">实时剩余时间 · 按方向 / 等级 / 新人条款筛选</span></div>
+    <div class="a h3" id="s3-h2" style="left:120px;top:58px">点开任意会议，<span class="y">规则一屏看完</span></div>
+    <div class="a h3" id="s3-h3" style="left:120px;top:58px">电脑、手机，<span class="y">都顺手</span></div>
+    <div class="frame-wrap" id="s3-fw" style="left:280px;top:160px"></div>
+    <div class="phone a" id="s3-phone" style="left:1440px;top:190px"><img src="assets/dash-mobile.png" alt=""></div>
+  </section>
+
+  <!-- 4 · agent -->
+  <section class="scene" id="s4">
+    <div class="a h3" id="s4-h1" style="left:120px;top:58px">直接说你的情况，<span class="y">Agent 帮你选会</span></div>
+    <div class="a h3" id="s4-h2" style="left:120px;top:58px">它自己动手查<span class="small" id="s4-sub">筛选会议 · 检索知识库 · 读页面</span></div>
+    <div class="a h3" id="s4-h3" style="left:120px;top:58px">给出候选和理由，<span class="y">风险也讲清楚</span></div>
+    <div class="frame-wrap" id="s4-fw" style="left:280px;top:160px"></div>
+  </section>
+
+  <!-- 5 · graph reasoning -->
+  <section class="scene" id="s5">
+    <div class="a h3" id="s5-h1" style="left:120px;top:58px">多跳推理：<span class="y">问题 → 方向 → 会议 → 条款</span></div>
+    <div class="a h3" id="s5-h2" style="left:120px;top:58px">推理路径，<span class="y">在知识图谱上高亮</span></div>
+    <div id="s5a" class="layer">
+      <div class="a small" id="trace-cap" style="left:110px;top:150px">真实查询记录</div>
+      <div id="trace"></div>
+      <svg id="chain" viewBox="0 0 1920 1080"></svg>
+      <div class="legend-row a" id="chain-legend" style="left:800px;top:968px"></div>
+    </div>
+    <div class="frame-wrap" id="s5-fw" style="left:280px;top:160px"></div>
+  </section>
+
+  <!-- 6 · wiki -->
+  <section class="scene" id="s6">
+    <div class="a kicker" id="s6-k" style="left:120px;top:210px">LLM WIKI · 不是 RAG</div>
+    <div class="a h3" id="s6-h" style="left:120px;top:258px">知识库是一本<br><span class="y">互相链接的 Wiki</span></div>
+    <div class="a bignum" id="s6-n1" style="left:120px;top:440px"><span>0</span><small>个页面</small></div>
+    <div class="a bignum" id="s6-n2" style="left:120px;top:580px"><span>0</span><small>条链接</small></div>
+    <div class="a chips" id="s6-chips" style="left:120px;top:730px;width:640px"></div>
+    <div class="a note" id="s6-note" style="left:120px;top:812px;width:600px">回答时读页面、沿链接走，<br>不去翻原始材料</div>
+    <div class="frame-wrap" id="s6-fw" style="left:770px;top:200px"></div>
+  </section>
+
+  <!-- 7 · submission details -->
+  <section class="scene" id="s7">
+    <div class="a h3" id="s7-h1" style="left:120px;top:58px">首投最容易踩的坑，<span class="y">提前标出来</span></div>
+    <div class="a small" id="s7-c1" style="left:120px;top:140px"></div>
+    <div id="cards"></div>
+    <div class="a h3" id="s7-h2" style="left:120px;top:58px">要不要到场？能投几篇？<span class="y">先看清</span></div>
+    <div class="statrow a" id="row-onsite" style="left:120px;top:210px"></div>
+    <div class="statrow a" id="row-blind" style="left:120px;top:440px"></div>
+    <div class="statrow a" id="row-cap" style="left:120px;top:670px"></div>
+    <div class="inset a" id="s7-inset" style="left:1110px;top:200px;width:690px;height:640px"><img src="assets/drawer-rules.png" alt=""><div class="spot" style="opacity:0"></div></div>
+    <div class="a small" id="s7-cap" style="left:1110px;top:862px;width:690px;text-align:center">每个会议的详情里，规则逐条写清并标注出处</div>
+  </section>
+
+  <!-- 8 · numbers -->
+  <section class="scene" id="s8">
+    <div class="a h2 center" id="s8-title" style="top:170px">数据较真，<span class="y">查不到就写「待确认」</span></div>
+    <div class="stat a" id="st1" style="left:140px"><b>0</b><span>个会议 · <span id="s8-dirs" style="display:inline;margin:0;font-size:inherit">10</span> 个方向</span></div>
+    <div class="stat a" id="st2" style="left:550px"><b>0</b><span>个官网逐条核实</span></div>
+    <div class="stat a" id="st3" style="left:960px"><b>0</b><span>个标注新人作者条款</span></div>
+    <div class="stat a" id="st4" style="left:1370px"><b>0</b><span>个附往届录用率</span></div>
+    <div class="a sub center" id="s8-cap" style="top:760px">日期由代码计算 · 每个字段可追溯 · 联网查到的新信息先进待审区</div>
+  </section>
+
+  <!-- 9 · end card -->
+  <section class="scene" id="s9">
+    <svg class="a" id="logo2" width="150" height="150" viewBox="0 0 32 32" style="left:885px;top:240px">
+      <rect width="32" height="32" rx="7" fill="#1F3552" stroke="rgba(255,255,255,.18)" stroke-width=".3"/>
+      <path d="M10 11L19 22M22 9L19 22M10 11L22 9" stroke="#fff" stroke-width="1.4" stroke-linecap="round" fill="none" opacity=".75"/>
+      <circle cx="10" cy="11" r="3.2" fill="#fff"/><circle cx="22" cy="9" r="2.4" fill="#F2B84B"/><circle cx="19" cy="22" r="3.6" fill="#fff"/>
+    </svg>
+    <div class="a h1 center" id="s9-title" style="top:420px">CCF 会议助手</div>
+    <div class="a center" id="s9-url" style="top:590px"><span class="url-pill">m-24rjgc.github.io/ccf2027</span></div>
+    <div class="a sub center" id="s9-tag" style="top:725px">免费使用 · 无需注册 · 无需 API Key</div>
+  </section>
+
+  <div class="layer" id="vignette"></div>
+  <div class="layer" id="fade"></div>
+</div>
+<script src="../site/js/dashboard-data.js"></script>
+<script src="out/facts.js"></script>
+<script src="stage.js"></script>
+</body>
+</html>

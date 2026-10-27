@@ -7,6 +7,33 @@ import { handleAdmin, authorizeAdmin, usageReport, effectiveLimits, LIMIT_FIELDS
 import { publicSearchQuery, publicPageUrl } from "../lib/web-privacy.mjs";
 import { protectResponse, rejectUnsafeRequest } from "../lib/security.mjs";
 
+test('separate visitors never share conversation context or persist private message text', async () => {
+  const env = environment(), original = globalThis.fetch;
+  const markers = ['PRIVATE_VISITOR_ALPHA', 'PRIVATE_VISITOR_BETA'];
+  const received = [];
+  globalThis.fetch = async (_url, options) => {
+    const body = JSON.parse(options.body), text = body.messages.at(-1).content;
+    const other = markers.find(x => x !== text);
+    assert.ok(!JSON.stringify(body).includes(other));
+    for (const key of [env.STEP_API_KEY, env.DEEPSEEK_API_KEY, env.CLIENT_HASH_SECRET]) assert.ok(!options.body.includes(key));
+    received.push(text);
+    return new Response('data: ' + JSON.stringify({choices:[{delta:{content:'answer for ' + text},finish_reason:'stop'}],usage:{prompt_tokens:10,completion_tokens:5}}) + '\n\ndata: [DONE]\n\n');
+  };
+  try {
+    for (let i = 0; i < markers.length; i++) {
+      const response = await handle(request({text:markers[i],effort:'low'},{'cf-connecting-ip':`192.0.2.${i+1}`}), env);
+      const result = await response.text();
+      assert.match(result,/event: done/);
+      assert.ok(!result.includes(markers[1-i]));
+    }
+    assert.deepEqual(received,markers);
+    for (const {name} of env.DB.sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table'").all()) {
+      const rows = JSON.stringify(env.DB.sqlite.prepare('SELECT * FROM "'+name.replaceAll('"','""')+'"').all());
+      for (const marker of markers) assert.ok(!rows.includes(marker));
+    }
+  } finally {globalThis.fetch=original;env.DB.sqlite.close();}
+});
+
 function database() {
   const sqlite = new DatabaseSync(":memory:");
   for (const name of readdirSync(new URL("../drizzle/", import.meta.url)).filter(x => x.endsWith(".sql"))) {

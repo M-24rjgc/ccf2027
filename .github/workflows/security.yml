@@ -4,6 +4,7 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
 jobs:
@@ -16,4 +17,4 @@ jobs:
           node-version: '24'
       - run: npm ci --prefix backend --ignore-scripts --no-fund
       - run: npm audit --prefix backend --audit-level=moderate
-      - run: node --test backend/tests/service.test.mjs tests/privacy.test.mjs
+      - run: node --test backend/tests/service.test.mjs tests/privacy.test.mjs tests/dashboard.test.mjs tests/promo-security.test.mjs

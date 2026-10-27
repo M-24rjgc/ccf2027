@@ -371,10 +371,7 @@ bundle = {
 os.makedirs(SITE_DATA, exist_ok=True)
 with open(os.path.join(SITE_DATA, "wiki.json"), "w", encoding="utf-8") as f:
     json.dump(bundle, f, ensure_ascii=False, separators=(",", ":"))
-# 倒计时看板随站点一起发布
-dash = os.path.join(D, "CCF2027投稿倒计时看板.html")
-if os.path.exists(dash):
-    shutil.copy(dash, os.path.join(D, "site", "dashboard.html"))
+# 倒计时看板由 build_html.py 直接写入 site/（site/dashboard.html 是手写页面，这里不再覆盖）
 
 print(f"wiki: {len(pages)} 页（会议 {len(rows)} / 方向 {sum(p['type'] == 'direction' for p in pages.values())} / "
       f"概念 {len(CONCEPTS)}）；关系 {len(edges)} 条；同期同地组 {sum(1 for g in colo.values() if len(g) > 1)}")
